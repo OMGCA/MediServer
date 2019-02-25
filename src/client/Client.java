@@ -69,13 +69,13 @@ public class Client {
 
 		InputStream inStream = null;
 		inStream = socket.getInputStream();
-		
+
 		byte[] bytes = new byte[1024];
 		int len;
 
 		StringBuilder sb = new StringBuilder();
-		while((len = inStream.read(bytes)) != -1){
-			sb.append(new String(bytes,0,len,"UTF-8"));
+		while ((len = inStream.read(bytes)) != -1) {
+			sb.append(new String(bytes, 0, len, "UTF-8"));
 		}
 
 		/* 端口关闭 */
@@ -289,47 +289,64 @@ public class Client {
 					submit.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							try {
-								Patient newPatient = new Patient(demoField[0].getText());
-								newPatient.setAge(Integer.parseInt(demoField[1].getText()));
-								newPatient.setSex(demoField[2].getText());
-								newPatient.setSlotID(demoField[3].getText());
-								newPatient.setDoc(demoField[4].getText());
-
-								newPatient.setBodyTemp(Double.parseDouble(dataField[0].getText()));
-								newPatient.setPulse(Integer.parseInt(dataField[1].getText()));
-								newPatient.setBreath(Integer.parseInt(dataField[2].getText()));
-								newPatient.setReleasePressure(Integer.parseInt(dataField[3].getText()));
-								newPatient.setTensePressure(Integer.parseInt(dataField[4].getText()));
-								newPatient.setBgAnalysis(Double.parseDouble(dataField[5].getText()));
-								newPatient.setBloodNa(Integer.parseInt(dataField[6].getText()));
-								newPatient.setBloodK(Double.parseDouble(dataField[7].getText()));
-
-								newPatient.setOpPending(noteField[0].getText());
-								newPatient.setPathologyResult(noteField[1].getText());
-								newPatient.setImaging(noteField[2].getText());
-								newPatient.setECG(noteField[3].getText());
-								newPatient.setDocNote(noteField[4].getText());
-
-								String noticeMsg = submitNewPatient(serverAddress.getText(), 34161, newPatient);
-
+							if (demoField[3].getText().length() == 0) {
 								JFrame modifyNotice = new JFrame();
 								modifyNotice.setTitle("提示");
-								modifyNotice.setSize(200,120);
+								modifyNotice.setSize(200, 120);
 								modifyNotice.setVisible(true);
 								modifyNotice.setLayout(new GridBagLayout());
-								JLabel label = new JLabel(noticeMsg);
+								JLabel label = new JLabel("床位号不能为空");
 								label.setFont(xtDefault);
-								
+
 								GridBagConstraints c = new GridBagConstraints();
 								c.fill = GridBagConstraints.HORIZONTAL;
 								c.gridx = 0;
 								c.gridy = 0;
 
 								modifyNotice.add(label, c);
+							} else {
+								try {
+									Patient newPatient = new Patient(demoField[0].getText());
+									newPatient.setAge(Integer.parseInt(demoField[1].getText()));
+									newPatient.setSex(demoField[2].getText());
+									newPatient.setSlotID(demoField[3].getText());
+									newPatient.setDoc(demoField[4].getText());
 
-							} catch (Exception e2) {
-								e2.printStackTrace();
+									newPatient.setBodyTemp(Double.parseDouble(dataField[0].getText()));
+									newPatient.setPulse(Integer.parseInt(dataField[1].getText()));
+									newPatient.setBreath(Integer.parseInt(dataField[2].getText()));
+									newPatient.setReleasePressure(Integer.parseInt(dataField[3].getText()));
+									newPatient.setTensePressure(Integer.parseInt(dataField[4].getText()));
+									newPatient.setBgAnalysis(Double.parseDouble(dataField[5].getText()));
+									newPatient.setBloodNa(Integer.parseInt(dataField[6].getText()));
+									newPatient.setBloodK(Double.parseDouble(dataField[7].getText()));
+
+									newPatient.setOpPending(noteField[0].getText());
+									newPatient.setPathologyResult(noteField[1].getText());
+									newPatient.setImaging(noteField[2].getText());
+									newPatient.setECG(noteField[3].getText());
+									newPatient.setDocNote(noteField[4].getText());
+
+									String noticeMsg = submitNewPatient(serverAddress.getText(), 34161, newPatient);
+
+									JFrame modifyNotice = new JFrame();
+									modifyNotice.setTitle("提示");
+									modifyNotice.setSize(200, 120);
+									modifyNotice.setVisible(true);
+									modifyNotice.setLayout(new GridBagLayout());
+									JLabel label = new JLabel(noticeMsg);
+									label.setFont(xtDefault);
+
+									GridBagConstraints c = new GridBagConstraints();
+									c.fill = GridBagConstraints.HORIZONTAL;
+									c.gridx = 0;
+									c.gridy = 0;
+
+									modifyNotice.add(label, c);
+
+								} catch (Exception e2) {
+									e2.printStackTrace();
+								}
 							}
 						}
 					});
