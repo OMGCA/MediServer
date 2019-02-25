@@ -1,6 +1,7 @@
 package client;
 
 import java.io.OutputStream;
+import java.io.InputStream;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -57,17 +58,32 @@ public class Client {
 	}
 
 	/* 上传新Patient方法，对应SocketServer中的ModPatient */
-	public static void submitNewPatient(String host, int port, Patient p) throws Exception {
+	public static String submitNewPatient(String host, int port, Patient p) throws Exception {
 		Socket socket = new Socket(host, port);
 
 		/* 准备发送至服务器的Patient类 */
 		ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());
 		/* 将参数中的Patient写入ObjectOutputStream，并发送至服务器 */
 		outStream.writeObject(p);
+		socket.shutdownOutput();
+
+		InputStream inStream = null;
+		inStream = socket.getInputStream();
+		
+		byte[] bytes = new byte[1024];
+		int len;
+
+		StringBuilder sb = new StringBuilder();
+		while((len = inStream.read(bytes)) != -1){
+			sb.append(new String(bytes,0,len,"UTF-8"));
+		}
 
 		/* 端口关闭 */
 		outStream.close();
+		inStream.close();
 		socket.close();
+
+		return sb.toString();
 	}
 
 	public static void GUISetup() {
@@ -295,7 +311,23 @@ public class Client {
 								newPatient.setECG(noteField[3].getText());
 								newPatient.setDocNote(noteField[4].getText());
 
-								submitNewPatient(serverAddress.getText(), 34161, newPatient);
+								String noticeMsg = submitNewPatient(serverAddress.getText(), 34161, newPatient);
+
+								JFrame modifyNotice = new JFrame();
+								modifyNotice.setTitle("提示");
+								modifyNotice.setSize(200,120);
+								modifyNotice.setVisible(true);
+								modifyNotice.setLayout(new GridBagLayout());
+								JLabel label = new JLabel(noticeMsg);
+								label.setFont(xtDefault);
+								
+								GridBagConstraints c = new GridBagConstraints();
+								c.fill = GridBagConstraints.HORIZONTAL;
+								c.gridx = 0;
+								c.gridy = 0;
+
+								modifyNotice.add(label, c);
+
 							} catch (Exception e2) {
 								e2.printStackTrace();
 							}
