@@ -318,7 +318,7 @@ public class Client {
 									newPatient.setReleasePressure(Integer.parseInt(dataField[3].getText()));
 									newPatient.setTensePressure(Integer.parseInt(dataField[4].getText()));
 									newPatient.setBgAnalysis(Double.parseDouble(dataField[5].getText()));
-									newPatient.setBloodNa(Integer.parseInt(dataField[6].getText()));
+									newPatient.setBloodNa((int)Double.parseDouble(dataField[6].getText()));
 									newPatient.setBloodK(Double.parseDouble(dataField[7].getText()));
 
 									newPatient.setOpPending(noteField[0].getText());
