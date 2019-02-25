@@ -53,12 +53,9 @@ public class Server {
 		/* 定义修改/新增病人线程 */
 		Server.ModPatient modPatient = threadRun.new ModPatient();
 
-		Server.AddPatient addPatient = threadRun.new AddPatient();
-
 		/* 启动线程 */
 		sendPatient.start();
 		modPatient.start();
-		addPatient.start();
 	}
 
 	/* 查询病人线程定义 */
@@ -145,35 +142,6 @@ public class Server {
 					outStream.close();
 					mSocket.close();
 					modSocket.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	class AddPatient extends Thread {
-		public void run() {
-			while (true) {
-				try {
-					addSocket = new ServerSocket(addPort);
-					System.out.println("等待添加新的患者信息");
-					aSocket = addSocket.accept();
-					System.out.println("客户端" + aSocket.getRemoteSocketAddress().toString() + "已连接至端口" + addPort);
-
-					ObjectInputStream inStream = new ObjectInputStream(aSocket.getInputStream());
-
-					Patient p = (Patient) inStream.readObject();
-					System.out.println(
-							"客户端" + aSocket.getRemoteSocketAddress().toString() + "已添加病人" + p.getName() + "信息");
-					System.out.println("-------------------");
-
-					addPatient(p, new File(database));
-					patientList.add(p);
-
-					inStream.close();
-					aSocket.close();
-					addSocket.close();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
