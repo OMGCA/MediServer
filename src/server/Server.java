@@ -4,6 +4,7 @@ import global.Patient;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
+import java.io.OutputStream;
 import java.io.Writer;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -127,14 +128,21 @@ public class Server {
 					System.out.println(
 							"客户端" + mSocket.getRemoteSocketAddress().toString() + "已修改病人" + p.getName() + "信息");
 					System.out.println("-------------------");
-					
+
 					/* 调用修改病人方法 */
 					modPatient(p, p.getSlotID());
 					/* 同步数据库 */
 					importPatientInfo();
 
+					String successMsg = "病人数据修改成功";
+
+					OutputStream outStream = mSocket.getOutputStream();
+					mSocket.getOutputStream().write(successMsg.getBytes("UTF-8"));
+					mSocket.shutdownOutput();
+
 					/* 关闭端口 */
 					inStream.close();
+					outStream.close();
 					mSocket.close();
 					modSocket.close();
 				} catch (Exception e) {
