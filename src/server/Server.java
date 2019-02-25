@@ -87,13 +87,13 @@ public class Server {
 					}
 					/* 通过接收到的从客户端发来的字段，筛选出将要发送至客户端的病人信息 */
 					Patient patient = queryPatient(sb.toString());
-					System.out.println("收到NFC标签"+sb +" 的 信息请求");
+					System.out.println("收到NFC标签"+sb+"的信息请求");
 
-				  /* 定义ObjectOutputStream，输出为发送至客户端的Patient类，故使用ObjectOutputStream */
+				  	/* 定义ObjectOutputStream，输出为发送至客户端的Patient类，故使用ObjectOutputStream */
 					ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());
 					/* 将第82行中筛选出的病人信息写入outStream */
 					outStream.writeObject(patient);
-					System.out.println("已将患者"+patient.getName()+"信 息 发送至客户端");
+					System.out.println("已将患者"+patient.getName()+"信息发送至客户端");
 					System.out.println("-------------------");
 
 					/* 关闭所有端口 */
@@ -118,7 +118,7 @@ public class Server {
 					System.out.println("等待新的患者信息发送");
 					mSocket = modSocket.accept();
 					/* 等待客户端接入 */
-					System.out.println("客户端"+mSocket.getRemoteSocketAddress().toString()+" 已连接，端口 " + modPort);
+					System.out.println("客户端"+mSocket.getRemoteSocketAddress().toString()+"已连接至端口" + modPort);
 
 					/* 修改/新增病人需要接收客户端发送的Patient类，故使用ObjectInputStream */
 					ObjectInputStream inStream = new ObjectInputStream(mSocket.getInputStream());
@@ -127,11 +127,10 @@ public class Server {
 					System.out.println("客户端" + mSocket.getRemoteSocketAddress().toString() + "已修改病人"+p.getName() + "信息");
 					System.out.println("-------------------");
 					/* 将新增的Patient类写入数据库中 */
-					addPatient(p, new File(database));
+
+					modPatient(p,p.getSlotID());
 					importPatientInfo();
-					/* 修改病人功能尚未完成 */
-					// modPatient(p,p.getSlotID());
-					// new File("patient.data").delete();
+
 
 					/* 关闭端口 */
 					inStream.close();
@@ -194,6 +193,7 @@ public class Server {
 				/* 详细记录新Patient信息后添加至patientList中 */
 				registerPatient(tmpPatient, tmpArr);
 			}
+			new FileInputStream(f).close();
 		} catch (Exception e) {
 			System.out.println("PATIENT_IMPORT_ERROR: Specific data file can not be found or accessed.");
 			e.printStackTrace();
@@ -203,18 +203,27 @@ public class Server {
 	/* 未完成的修改病人方法 */
 	public static void modPatient(Patient p, String slotID) {
 		File fTmp = new File("database.tmp");
-		int flag = 0;
-		patientList.add(p);
+
+		//patientList.add(p);
 		for (int i = 0; i < patientList.size(); i++) {
 
-			if (!patientList.get(i).getSlotID().equals(slotID) || flag == 1) {
+			if (!patientList.get(i).getSlotID().equals(slotID)) {
 				addPatient(patientList.get(i), fTmp);
 			}
-			if (patientList.get(i).getSlotID().equals(slotID)) {
-				flag = 1;
-			}
-
 		}
+		addPatient(p,fTmp);
+		File originalDatabase = new File(database);
+		System.gc();
+		
+		if(originalDatabase.delete())
+			System.out.println("Original database deleted");
+		else
+			System.out.println("Fail to delete orignal database");
+
+		if(fTmp.renameTo(originalDatabase))
+			System.out.println("Database updated");
+		else
+			System.out.println("Fail to rename tmp database");
 	}
 
 	/* 新增病人至数据库方法 */

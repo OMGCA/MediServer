@@ -102,7 +102,7 @@ public class Client {
 		serverAddress.setText("120.78.160.93");
 		frame.add(serverAddress, c);
 
-		JLabel port = new JLabel("端口");
+		/*JLabel port = new JLabel("端口");
 		c.gridx = 0;
 		c.gridy = 1;
 		port.setFont(xtDefault);
@@ -112,10 +112,10 @@ public class Client {
 		JTextField portValue = new JTextField(10);
 		portValue.setFont(xtDefault);
 		portValue.setText("34167");
-		frame.add(portValue, c);
+		frame.add(portValue, c);*/
 
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 1;
 		JLabel tagID = new JLabel("查询ID");
 		tagID.setFont(xtDefault);
 		frame.add(tagID, c);
@@ -141,8 +141,7 @@ public class Client {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					/* 从服务器得到Patient后 */
-					Patient tmpPatient = retrievePatient(serverAddress.getText(), Integer.parseInt(portValue.getText()),
-							tagIDInput.getText());
+					Patient tmpPatient = retrievePatient(serverAddress.getText(), 34160,tagIDInput.getText());
 					/* 显示Patient信息的界面 */
 					JFrame patientInfo = new JFrame("患者" + tmpPatient.getSlotID() + "信息");
 
@@ -299,7 +298,7 @@ public class Client {
 								newPatient.setECG(noteField[3].getText());
 								newPatient.setDocNote(noteField[4].getText());
 
-								submitNewPatient(serverAddress.getText(), 34168, newPatient);
+								submitNewPatient(serverAddress.getText(), 34161, newPatient);
 							} catch (Exception e2) {
 								e2.printStackTrace();
 							}
