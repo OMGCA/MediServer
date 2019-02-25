@@ -63,16 +63,16 @@ public class Server {
 	/* 查询病人线程定义 */
 	class SendPatient extends Thread {
 		public void run() {
-			while (true) { //无限循环，防止查询完成端口关闭后无法继续进行查询
+			while (true) { // 无限循环，防止查询完成端口关闭后无法继续进行查询
 				try {
 					/* 初始化ServerSocket类 */
 					serverSocket = new ServerSocket(queryPort);
 					System.out.println("等待客户端请求");
 					/* 等待客户端连接 */
 					socket = serverSocket.accept();
-				  /* 从数据库导入病人信息 */
+					/* 从数据库导入病人信息 */
 					importPatientInfo();
-					System.out.println("客户端"+socket.getRemoteSocketAddress().toString()+" 已连接，端口 " + queryPort);
+					System.out.println("客户端" + socket.getRemoteSocketAddress().toString() + " 已连接，端口 " + queryPort);
 					/* 定义InputStream，此方法中从客户端得到字段的输入，故使用InputStream */
 					InputStream inStream = null;
 					/* 得到客户端发来的字段 */
@@ -87,13 +87,13 @@ public class Server {
 					}
 					/* 通过接收到的从客户端发来的字段，筛选出将要发送至客户端的病人信息 */
 					Patient patient = queryPatient(sb.toString());
-					System.out.println("收到NFC标签"+sb+"的信息请求");
+					System.out.println("收到NFC标签" + sb + "的信息请求");
 
-				  	/* 定义ObjectOutputStream，输出为发送至客户端的Patient类，故使用ObjectOutputStream */
+					/* 定义ObjectOutputStream，输出为发送至客户端的Patient类，故使用ObjectOutputStream */
 					ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());
 					/* 将第82行中筛选出的病人信息写入outStream */
 					outStream.writeObject(patient);
-					System.out.println("已将患者"+patient.getName()+"信息发送至客户端");
+					System.out.println("已将患者" + patient.getName() + "信息发送至客户端");
 					System.out.println("-------------------");
 
 					/* 关闭所有端口 */
@@ -111,26 +111,27 @@ public class Server {
 	/* 修改/新增病人线程定义 */
 	class ModPatient extends Thread {
 		public void run() {
-			while (true) { //无限循环，防止查询完成端口关闭后无法继续进行查询
+			while (true) { // 无限循环，防止查询完成端口关闭后无法继续进行查询
 				try {
 					/* 初始化ServerSocket类 */
 					modSocket = new ServerSocket(modPort);
 					System.out.println("等待新的患者信息发送");
 					mSocket = modSocket.accept();
 					/* 等待客户端接入 */
-					System.out.println("客户端"+mSocket.getRemoteSocketAddress().toString()+"已连接至端口" + modPort);
+					System.out.println("客户端" + mSocket.getRemoteSocketAddress().toString() + "已连接至端口" + modPort);
 
 					/* 修改/新增病人需要接收客户端发送的Patient类，故使用ObjectInputStream */
 					ObjectInputStream inStream = new ObjectInputStream(mSocket.getInputStream());
 					/* 新建本地Patient类，存储客户端发送的Patient类 */
 					Patient p = (Patient) inStream.readObject();
-					System.out.println("客户端" + mSocket.getRemoteSocketAddress().toString() + "已修改病人"+p.getName() + "信息");
+					System.out.println(
+							"客户端" + mSocket.getRemoteSocketAddress().toString() + "已修改病人" + p.getName() + "信息");
 					System.out.println("-------------------");
-					/* 将新增的Patient类写入数据库中 */
-
-					modPatient(p,p.getSlotID());
+					
+					/* 调用修改病人方法 */
+					modPatient(p, p.getSlotID());
+					/* 同步数据库 */
 					importPatientInfo();
-
 
 					/* 关闭端口 */
 					inStream.close();
@@ -144,18 +145,19 @@ public class Server {
 	}
 
 	class AddPatient extends Thread {
-		public void run(){
-			while(true){
-				try{
+		public void run() {
+			while (true) {
+				try {
 					addSocket = new ServerSocket(addPort);
 					System.out.println("等待添加新的患者信息");
 					aSocket = addSocket.accept();
-					System.out.println("客户端"+aSocket.getRemoteSocketAddress().toString()+"已连接至端口"+addPort);
+					System.out.println("客户端" + aSocket.getRemoteSocketAddress().toString() + "已连接至端口" + addPort);
 
 					ObjectInputStream inStream = new ObjectInputStream(aSocket.getInputStream());
 
 					Patient p = (Patient) inStream.readObject();
-					System.out.println("客户端"+aSocket.getRemoteSocketAddress().toString()+"已添加病人"+p.getName()+"信息");
+					System.out.println(
+							"客户端" + aSocket.getRemoteSocketAddress().toString() + "已添加病人" + p.getName() + "信息");
 					System.out.println("-------------------");
 
 					addPatient(p, new File(database));
@@ -164,7 +166,7 @@ public class Server {
 					inStream.close();
 					aSocket.close();
 					addSocket.close();
-				} catch (Exception e){
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -202,28 +204,33 @@ public class Server {
 
 	/* 未完成的修改病人方法 */
 	public static void modPatient(Patient p, String slotID) {
+		/* 新建临时文件 */
 		File fTmp = new File("database.tmp");
 
-		//patientList.add(p);
+		/* 跳过待修改床位信息 */
 		for (int i = 0; i < patientList.size(); i++) {
 
 			if (!patientList.get(i).getSlotID().equals(slotID)) {
 				addPatient(patientList.get(i), fTmp);
 			}
 		}
-		addPatient(p,fTmp);
-		File originalDatabase = new File(database);
-		System.gc();
-		
-		if(originalDatabase.delete())
-			System.out.println("Original database deleted");
-		else
-			System.out.println("Fail to delete orignal database");
 
-		if(fTmp.renameTo(originalDatabase))
-			System.out.println("Database updated");
+		/* 加入待修改床位新信息 */
+		addPatient(p, fTmp);
+
+		File originalDatabase = new File(database);
+		/* 垃圾回收，否则接下来的代发无法执行 */
+		System.gc();
+
+		if (originalDatabase.delete())
+			System.out.println("正在更新数据库");
 		else
-			System.out.println("Fail to rename tmp database");
+			System.out.println("DATABASE_DELETE_ERROR: Fail to delete orignal database");
+
+		if (fTmp.renameTo(originalDatabase))
+			System.out.println("数据库更新完成");
+		else
+			System.out.println("DATABASE_UPDATE_ERROR: Fail to rename tmp database");
 	}
 
 	/* 新增病人至数据库方法 */

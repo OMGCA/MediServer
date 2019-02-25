@@ -102,17 +102,14 @@ public class Client {
 		serverAddress.setText("120.78.160.93");
 		frame.add(serverAddress, c);
 
-		/*JLabel port = new JLabel("端口");
-		c.gridx = 0;
-		c.gridy = 1;
-		port.setFont(xtDefault);
-		frame.add(port, c);
-
-		c.gridx = 1;
-		JTextField portValue = new JTextField(10);
-		portValue.setFont(xtDefault);
-		portValue.setText("34167");
-		frame.add(portValue, c);*/
+		/*
+		 * JLabel port = new JLabel("端口"); c.gridx = 0; c.gridy = 1;
+		 * port.setFont(xtDefault); frame.add(port, c);
+		 * 
+		 * c.gridx = 1; JTextField portValue = new JTextField(10);
+		 * portValue.setFont(xtDefault); portValue.setText("34167");
+		 * frame.add(portValue, c);
+		 */
 
 		c.gridx = 0;
 		c.gridy = 1;
@@ -141,7 +138,7 @@ public class Client {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					/* 从服务器得到Patient后 */
-					Patient tmpPatient = retrievePatient(serverAddress.getText(), 34160,tagIDInput.getText());
+					Patient tmpPatient = retrievePatient(serverAddress.getText(), 34160, tagIDInput.getText());
 					/* 显示Patient信息的界面 */
 					JFrame patientInfo = new JFrame("患者" + tmpPatient.getSlotID() + "信息");
 
