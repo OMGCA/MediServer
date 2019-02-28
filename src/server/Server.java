@@ -35,9 +35,9 @@ public class Server {
 	private static Socket aSocket = null;
 
 	/* 定义病人查询和修改/新增使用的网络端口 */
-	private static int queryPort = 34160;
-	private static int modPort = 34161;
-	private static int addPort = 34162;
+	private static int queryPort = 34167;
+	private static int modPort = 34168;
+	private static int addPort = 34169;
 	/* 定义病人类列表 */
 	private static List<Patient> patientList = null;
 	/* 数据库文件位置 */
