@@ -168,6 +168,8 @@ public class Server {
 			writer.write(contentType+"\n");
 			writer.flush();
 			writer.close();
+
+			System.gc();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

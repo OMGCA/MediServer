@@ -10,3 +10,15 @@
 [2019-03-01_17_02_16]	DATABASE_UPDATE_ERROR: Fail to rename tmp database
 [2019-03-01_17_02_16]	Info of patient 01 modification operation has failed, attempted by /127.0.0.1:56166
 [2019-03-01_17_02_16]	Port 34168 is opened.
+[2019-03-01_17_06_36]	Port 34168 is opened.
+[2019-03-01_17_06_36]	Port 34167 is opened.
+[2019-03-01_17_06_48]	/127.0.0.1:56245 has connected to server
+[2019-03-01_17_06_48]	/127.0.0.1:56245 has initialized a request on info of patient 01
+[2019-03-01_17_06_48]	Info of patient 01 has been sent to /127.0.0.1:56245
+[2019-03-01_17_06_48]	Port 34167 is opened.
+[2019-03-01_17_06_52]	/127.0.0.1:56245 has connected to server
+[2019-03-01_17_06_52]	/127.0.0.1:56245 is attempting to modify info of patient 01
+[2019-03-01_17_06_52]	DATABASE_DELETE_ERROR: Fail to delete original database
+[2019-03-01_17_06_52]	DATABASE_UPDATE_ERROR: Fail to rename tmp database
+[2019-03-01_17_06_52]	Info of patient 01 modification operation has failed, attempted by /127.0.0.1:56245
+[2019-03-01_17_06_52]	Port 34168 is opened.
