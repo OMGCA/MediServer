@@ -166,6 +166,7 @@ public class Server {
 			
 			writer.write("["+timestamp+"]"+"\t");
 			writer.write(contentType+"\n");
+
 			writer.flush();
 			writer.close();
 
@@ -277,6 +278,8 @@ public class Server {
 
 			writer.flush();
 			writer.close();
+
+			new OutputStreamWriter(new FileOutputStream(f, true), "UTF-8").close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
