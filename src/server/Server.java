@@ -227,8 +227,8 @@ public class Server {
 		}
 			
 		else{
-			System.out.println("DATABASE_DELETE_ERROR: Fail to delete orignal database");
-			writeToLog(logFile,"DATABASE_DELETE_ERROR: Fail to delete orignal database");
+			System.out.println("DATABASE_DELETE_ERROR: Fail to delete original database");
+			writeToLog(logFile,"DATABASE_DELETE_ERROR: Fail to delete original database");
 		}
 
 		if (fTmp.renameTo(originalDatabase)){
