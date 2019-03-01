@@ -21,6 +21,8 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Server {
 	/* 初始化ServerSocket和Socket类，用于查询病人 */
@@ -42,6 +44,8 @@ public class Server {
 	private static List<Patient> patientList = null;
 	/* 数据库文件位置 */
 	private static String database = "patient.data";
+	private static String logFileName = "Server Log.log";
+	private static File logFile = new File(logFileName);
 
 	public static void main(String[] args) throws Exception {
 		/* 定义多线程，使得两个网络端口处于并行状态 */
@@ -65,12 +69,15 @@ public class Server {
 				try {
 					/* 初始化ServerSocket类 */
 					serverSocket = new ServerSocket(queryPort);
+					writeToLog(logFile,"Port "+queryPort+" is opened.");
 					System.out.println("等待客户端请求");
 					/* 等待客户端连接 */
 					socket = serverSocket.accept();
 					/* 从数据库导入病人信息 */
 					importPatientInfo();
-					System.out.println("客户端" + socket.getRemoteSocketAddress().toString() + " 已连接，端口 " + queryPort);
+					String clientAddress = socket.getRemoteSocketAddress().toString();
+					System.out.println("客户端" + clientAddress + " 已连接，端口 " + queryPort);
+					writeToLog(logFile,clientAddress+" has connected to server");
 					/* 定义InputStream，此方法中从客户端得到字段的输入，故使用InputStream */
 					InputStream inStream = null;
 					/* 得到客户端发来的字段 */
@@ -85,12 +92,14 @@ public class Server {
 					}
 					/* 通过接收到的从客户端发来的字段，筛选出将要发送至客户端的病人信息 */
 					Patient patient = queryPatient(sb.toString());
+					writeToLog(logFile,clientAddress+" has initialized a request on info of patient "+ sb);
 					System.out.println("收到NFC标签" + sb + "的信息请求");
 
 					/* 定义ObjectOutputStream，输出为发送至客户端的Patient类，故使用ObjectOutputStream */
 					ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());
 					/* 将第82行中筛选出的病人信息写入outStream */
 					outStream.writeObject(patient);
+					writeToLog(logFile,"Info of patient " + sb + " has been sent to "+clientAddress);
 					System.out.println("已将患者" + patient.getName() + "信息发送至客户端");
 					System.out.println("-------------------");
 
@@ -113,28 +122,29 @@ public class Server {
 				try {
 					/* 初始化ServerSocket类 */
 					modSocket = new ServerSocket(modPort);
+					writeToLog(logFile,"Port "+modPort+" is opened.");
 					System.out.println("等待新的患者信息发送");
 					mSocket = modSocket.accept();
 					/* 等待客户端接入 */
+					String clientAddress = socket.getRemoteSocketAddress().toString();
 					System.out.println("客户端" + mSocket.getRemoteSocketAddress().toString() + "已连接至端口" + modPort);
-
+					writeToLog(logFile,clientAddress+" has connected to server");
 					/* 修改/新增病人需要接收客户端发送的Patient类，故使用ObjectInputStream */
 					ObjectInputStream inStream = new ObjectInputStream(mSocket.getInputStream());
 					/* 新建本地Patient类，存储客户端发送的Patient类 */
 					Patient p = (Patient) inStream.readObject();
+					writeToLog(logFile,clientAddress+" is attempting to modify info of patient " + p.getSlotID());
 					System.out.println(
 							"客户端" + mSocket.getRemoteSocketAddress().toString() + "已修改病人" + p.getName() + "信息");
 					System.out.println("-------------------");
 
 					/* 调用修改病人方法 */
-					modPatient(p, p.getSlotID());
+					String msg = modPatient(p, p.getSlotID(), clientAddress);
 					/* 同步数据库 */
 					importPatientInfo();
 
-					String successMsg = "病人数据修改成功";
-
 					OutputStream outStream = mSocket.getOutputStream();
-					mSocket.getOutputStream().write(successMsg.getBytes("UTF-8"));
+					mSocket.getOutputStream().write(msg.getBytes("UTF-8"));
 					mSocket.shutdownOutput();
 
 					/* 关闭端口 */
@@ -146,6 +156,20 @@ public class Server {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+
+	public static void writeToLog(File logFile, String contentType){
+		String timestamp = new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss").format(new Date());
+		try{
+			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logFile, true), "UTF-8"));
+			
+			writer.write("["+timestamp+"]"+"\t");
+			writer.write(contentType+"\n");
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -178,8 +202,7 @@ public class Server {
 		}
 	}
 
-	/* 未完成的修改病人方法 */
-	public static void modPatient(Patient p, String slotID) {
+	public static String modPatient(Patient p, String slotID, String clientAddress) {
 		/* 新建临时文件 */
 		File fTmp = new File("database.tmp");
 
@@ -195,18 +218,34 @@ public class Server {
 		addPatient(p, fTmp);
 
 		File originalDatabase = new File(database);
-		/* 垃圾回收，否则接下来的代发无法执行 */
+		/* 垃圾回收，否则接下来的代码无法执行 */
 		System.gc();
 
-		if (originalDatabase.delete())
+		if (originalDatabase.delete()){
 			System.out.println("正在更新数据库");
-		else
+			writeToLog(logFile,"Updating database");
+		}
+			
+		else{
 			System.out.println("DATABASE_DELETE_ERROR: Fail to delete orignal database");
+			writeToLog(logFile,"DATABASE_DELETE_ERROR: Fail to delete orignal database");
+		}
 
-		if (fTmp.renameTo(originalDatabase))
+		if (fTmp.renameTo(originalDatabase)){
+			String success = "病人信息修改成功";
 			System.out.println("数据库更新完成");
-		else
-			System.out.println("DATABASE_UPDATE_ERROR: Fail to rename tmp database");
+			writeToLog(logFile,"Database has been updated");
+			writeToLog(logFile,"Info of patient " + p.getSlotID() + " has been successfully modified by "+clientAddress);
+			return success;
+		}
+			
+		else{
+			String error = "DATABASE_UPDATE_ERROR: Fail to rename tmp database";
+			System.out.println(error);
+			writeToLog(logFile, error);
+			writeToLog(logFile,"Info of patient " + p.getSlotID() + " modification operation has failed, attempted by "+clientAddress);
+			return error;
+		}
 	}
 
 	/* 新增病人至数据库方法 */

@@ -154,7 +154,7 @@ public class Client {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					/* 从服务器得到Patient后 */
-					Patient tmpPatient = retrievePatient(serverAddress.getText(), 34160, tagIDInput.getText());
+					Patient tmpPatient = retrievePatient(serverAddress.getText(), 34167, tagIDInput.getText());
 					/* 显示Patient信息的界面 */
 					JFrame patientInfo = new JFrame("患者" + tmpPatient.getSlotID() + "信息");
 
@@ -327,7 +327,7 @@ public class Client {
 									newPatient.setECG(noteField[3].getText());
 									newPatient.setDocNote(noteField[4].getText());
 
-									String noticeMsg = submitNewPatient(serverAddress.getText(), 34161, newPatient);
+									String noticeMsg = submitNewPatient(serverAddress.getText(), 34168, newPatient);
 
 									JFrame modifyNotice = new JFrame();
 									modifyNotice.setTitle("提示");

@@ -1,0 +1,12 @@
+[2019-03-01_17_01_53]	Port 34167 is opened.
+[2019-03-01_17_01_53]	Port 34168 is opened.
+[2019-03-01_17_02_11]	/127.0.0.1:56166 has connected to server
+[2019-03-01_17_02_11]	/127.0.0.1:56166 has initialized a request on info of patient 01
+[2019-03-01_17_02_11]	Info of patient 01 has been sent to /127.0.0.1:56166
+[2019-03-01_17_02_11]	Port 34167 is opened.
+[2019-03-01_17_02_16]	/127.0.0.1:56166 has connected to server
+[2019-03-01_17_02_16]	/127.0.0.1:56166 is attempting to modify info of patient 01
+[2019-03-01_17_02_16]	DATABASE_DELETE_ERROR: Fail to delete orignal database
+[2019-03-01_17_02_16]	DATABASE_UPDATE_ERROR: Fail to rename tmp database
+[2019-03-01_17_02_16]	Info of patient 01 modification operation has failed, attempted by /127.0.0.1:56166
+[2019-03-01_17_02_16]	Port 34168 is opened.
