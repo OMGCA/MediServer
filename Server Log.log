@@ -54,3 +54,15 @@
 [2019-03-01_17_34_05]	/127.0.0.1:56478 has initialized a request on info of patient 02
 [2019-03-01_17_34_05]	Info of patient 02 has been sent to /127.0.0.1:56478
 [2019-03-01_17_34_05]	Port 34167 is opened.
+[2019-03-02_22_19_45]	Port 34168 is opened.
+[2019-03-02_22_19_45]	Port 34167 is opened.
+[2019-03-02_22_24_03]	Port 34168 is opened.
+[2019-03-02_22_24_03]	Port 34167 is opened.
+[2019-03-02_22_25_02]	/127.0.0.1:54195 has connected to server
+[2019-03-02_22_25_02]	/127.0.0.1:54195 has initialized a request on info of patient 
+[2019-03-02_22_25_54]	Port 34168 is opened.
+[2019-03-02_22_25_54]	Port 34167 is opened.
+[2019-03-02_22_26_02]	/127.0.0.1:54199 has connected to server
+[2019-03-02_22_26_02]	/127.0.0.1:54199 has initialized a request on info of patient 01
+[2019-03-02_22_26_02]	Info of patient 01 has been sent to /127.0.0.1:54199
+[2019-03-02_22_26_02]	Port 34167 is opened.
