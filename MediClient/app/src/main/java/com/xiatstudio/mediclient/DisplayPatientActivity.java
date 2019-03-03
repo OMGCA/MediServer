@@ -22,10 +22,13 @@ public class DisplayPatientActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /* 新建Intent */
         Intent intent = getIntent();
         String patientName = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
+        /* 得到新页面文本部件ID */
         TextView textView = findViewById(R.id.textView3);
+        /* 将Patient姓名显示在上面 */
         textView.setText(patientName);
 
         FloatingActionButton fab = findViewById(R.id.fab);
