@@ -54,12 +54,13 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.181" />
+            app:layout_constraintVertical_bias="0.169" />
 
         <EditText
             android:id="@+id/serverAddress"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="45dp"
             android:layout_marginBottom="12dp"
             android:ems="10"
@@ -67,6 +68,7 @@
             android:text="120.78.160.93"
             app:layout_constraintBottom_toTopOf="@+id/patientIDText"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
             app:layout_constraintTop_toTopOf="@+id/textView2"
             app:layout_constraintVertical_bias="0.6" />
 
@@ -74,6 +76,7 @@
             android:id="@+id/patientIDText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="45dp"
             android:layout_marginBottom="16dp"
             android:ems="10"
@@ -81,8 +84,8 @@
             android:text="01"
             app:layout_constraintBottom_toTopOf="@+id/queryButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/serverAddress"
+            app:layout_constraintHorizontal_bias="0.932"
+            app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="@+id/textView" />
 
         <Button
@@ -97,7 +100,7 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/patientIDText" />
 

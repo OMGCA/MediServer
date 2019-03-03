@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.xiatstudio.mediclient.Patient;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -36,23 +38,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /* 从UI中得到文本区部件 */
         final EditText patientID = findViewById(R.id.patientIDText);
         final EditText serverAdd = findViewById(R.id.serverAddress);
 
-
-
+        /* 查询按钮 */
         Button queryButton = findViewById(R.id.queryButton);
         queryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String queryID = patientID.getText().toString();
-                final String serverAddress = serverAdd.getText().toString();
+                final String queryID = patientID.getText().toString(); /* 得到文本区输入的病人ID */
+                final String serverAddress = serverAdd.getText().toString(); /* 得到文本区输入的服务器地址 */
                 new Thread(new ClientThread(serverAddress,queryID)).start();
             }
         });
-
-
-
 
     }
 
@@ -78,10 +77,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /* 查询病人线程，具体注释见服务器中的Client.java */
     class ClientThread implements Runnable{
         private String serverAddress;
         private String patientID;
 
+        /* 新增参数设置，用于与UI交互 */
         public ClientThread(String serverAddress, String patientID) {
             this.serverAddress = serverAddress;
             this.patientID = patientID;
@@ -97,17 +98,13 @@ public class MainActivity extends AppCompatActivity {
                 client.shutdownOutput();
 
                 ObjectInputStream inStream = new ObjectInputStream(client.getInputStream());
-                Patient patient = (Patient) inStream.readObject();
+                Patient p = (Patient) inStream.readObject();
 
                 inStream.close();
                 outStream.close();
                 client.close();
             } catch (Exception e){
-                AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
-                builder.setTitle("Warning");
-                builder.setMessage("Exception on connecting to server.");
-                AlertDialog alert = builder.create();
-                alert.show();
+                e.printStackTrace();
             }
         }
     }
