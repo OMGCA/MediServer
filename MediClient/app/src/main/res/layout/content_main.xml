@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.218" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/serverAddress"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginStart="11dp"
@@ -45,14 +45,14 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="120.78.160.93"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/patientIDText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/patientIDText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="61dp"
@@ -65,7 +65,7 @@
         app:layout_constraintBottom_toTopOf="@+id/queryButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/serverAddress" />
 
     <Button
         android:id="@+id/queryButton"
@@ -80,6 +80,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/patientIDText" />
 
 </android.support.constraint.ConstraintLayout>

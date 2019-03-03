@@ -1,6 +1,8 @@
 package com.xiatstudio.mediclient;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,13 +36,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final EditText patientID = findViewById(R.id.patientIDText);
+        final EditText serverAdd = findViewById(R.id.serverAddress);
+
+
+
         Button queryButton = findViewById(R.id.queryButton);
         queryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Thread(new ClientThread()).start();
+                final String queryID = patientID.getText().toString();
+                final String serverAddress = serverAdd.getText().toString();
+                new Thread(new ClientThread(serverAddress,queryID)).start();
             }
         });
+
+
 
 
     }
@@ -67,11 +79,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class ClientThread implements Runnable{
+        private String serverAddress;
+        private String patientID;
+
+        public ClientThread(String serverAddress, String patientID) {
+            this.serverAddress = serverAddress;
+            this.patientID = patientID;
+        }
+
         @Override
         public void run(){
             try{
-                Socket client = new Socket("120.78.160.93",34167);
+                Socket client = new Socket(serverAddress,34167);
 
+                OutputStream outStream = client.getOutputStream();
+                client.getOutputStream().write(patientID.getBytes("UTF-8"));
+                client.shutdownOutput();
+
+                ObjectInputStream inStream = new ObjectInputStream(client.getInputStream());
+                Patient patient = (Patient) inStream.readObject();
+
+                inStream.close();
+                outStream.close();
                 client.close();
             } catch (Exception e){
                 AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
@@ -81,11 +110,6 @@ public class MainActivity extends AppCompatActivity {
                 alert.show();
             }
         }
-    }
-
-    public void queryButtonMethod(String ipAddress){
-
-
     }
 
 }
