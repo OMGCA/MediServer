@@ -1,6 +1,7 @@
 package com.xiatstudio.mediclient;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        new Thread(new ClientThread()).start();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +32,16 @@ public class MainActivity extends AppCompatActivity {
                 
             }
         });
+
+        Button queryButton = findViewById(R.id.queryButton);
+        queryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(new ClientThread()).start();
+            }
+        });
+
+
     }
 
     @Override
@@ -60,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         public void run(){
             try{
                 Socket client = new Socket("120.78.160.93",34167);
+
                 client.close();
             } catch (Exception e){
                 AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
@@ -70,4 +82,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void queryButtonMethod(String ipAddress){
+
+
+    }
+
 }

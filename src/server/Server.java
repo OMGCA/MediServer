@@ -16,6 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -65,7 +66,9 @@ public class Server {
 			while (true) { // 无限循环，防止查询完成端口关闭后无法继续进行查询
 				try {
 					/* 初始化ServerSocket类 */
-					serverSocket = new ServerSocket(queryPort);
+					serverSocket = new ServerSocket();
+					serverSocket.setReuseAddress(true);
+					serverSocket.bind(new InetSocketAddress(queryPort));
 					writeToLog(logFile, "Port " + queryPort + " is opened.");
 					System.out.println("等待客户端请求");
 					/* 等待客户端连接 */
@@ -107,6 +110,7 @@ public class Server {
 					outStream.close();
 					socket.close();
 					serverSocket.close();
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
