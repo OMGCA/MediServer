@@ -1,6 +1,6 @@
-package server;
+package com.xiatstudio.mediclient;
 
-import global.Patient;
+import com.xiatstudio.mediclient.Patient;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;

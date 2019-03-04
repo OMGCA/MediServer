@@ -1,4 +1,4 @@
-package client;
+package com.xiatstudio.mediclient;
 
 import java.io.OutputStream;
 import java.io.InputStream;
@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-import global.Patient;
+import com.xiatstudio.mediclient.Patient;
 
 public class Client {
 	static Font xtDefault = new Font("Microsoft Yahei", Font.PLAIN, 14);

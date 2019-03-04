@@ -1,4 +1,4 @@
-package global;
+package com.xiatstudio.mediclient;
 
 import java.io.Serializable;
 
