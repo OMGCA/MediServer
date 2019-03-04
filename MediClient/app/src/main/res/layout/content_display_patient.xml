@@ -12,10 +12,10 @@
         android:id="@+id/patientNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="56dp"
         android:text="@string/patientName"
-        android:textSize="24sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,36 +23,362 @@
         android:id="@+id/patientAgeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/patientAge"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/patientSexText"
+        app:layout_constraintEnd_toEndOf="@+id/patientNameLabel"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/patientNameLabel"
+        app:layout_constraintTop_toTopOf="@+id/patientAgeText"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <TextView
+        android:id="@+id/patientSex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/patientSex"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/patientNFC"
+        app:layout_constraintEnd_toEndOf="@+id/patientAgeLabel"
+        app:layout_constraintStart_toStartOf="@+id/patientAgeLabel"
+        app:layout_constraintTop_toTopOf="@+id/patientSexText" />
+
+    <TextView
+        android:id="@+id/patientNFCID2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/patientNFC"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/patientDoc"
+        app:layout_constraintEnd_toEndOf="@+id/patientSex"
+        app:layout_constraintStart_toStartOf="@+id/patientSex"
+        app:layout_constraintTop_toTopOf="@+id/patientNFC" />
 
     <EditText
         android:id="@+id/patientNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:text="Name"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/patientNameLabel"
-        app:layout_constraintStart_toEndOf="@+id/patientNameLabel"
-        app:layout_constraintTop_toTopOf="@+id/patientNameLabel"
-        android:importantForAutofill="no" />
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/patientNameLabel" />
 
     <EditText
         android:id="@+id/patientAgeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:text="Age"
-        app:layout_constraintBottom_toBottomOf="@+id/patientAgeLabel"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/patientNameText"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/patientNameText"
-        app:layout_constraintTop_toTopOf="@+id/patientAgeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/patientNameText" />
+
+    <EditText
+        android:id="@+id/patientSexText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Sex"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/patientAgeText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/patientAgeText"
+        app:layout_constraintTop_toBottomOf="@+id/patientAgeText" />
+
+    <EditText
+        android:id="@+id/patientNFC"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="NFC"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/patientSexText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/patientSexText"
+        app:layout_constraintTop_toBottomOf="@+id/patientSexText" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="121dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/demoInfo"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="7dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/patientDoc"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/patientDoc"
+        app:layout_constraintEnd_toEndOf="@+id/patientNFCID2"
+        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintStart_toStartOf="@+id/patientNFCID2"
+        app:layout_constraintTop_toTopOf="@+id/patientDoc"
+        app:layout_constraintVertical_bias="0.428" />
+
+    <EditText
+        android:id="@+id/patientDoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Doc"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/patientNFC"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/patientNFC"
+        app:layout_constraintTop_toBottomOf="@+id/patientNFC" />
+
+    <TextView
+        android:id="@+id/pathological"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="228dp"
+        android:text="@string/pathologicalData"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/bodyTempLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="@string/bodyTmp"
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintHorizontal_bias="0.357"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <EditText
+        android:id="@+id/bodyTmpText"
+        android:layout_width="82dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="Body Tmp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bodyTempLabel"
+        app:layout_constraintEnd_toEndOf="@+id/patientDoc"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/patientDoc"
+        app:layout_constraintTop_toTopOf="@+id/bodyTempLabel" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="℃"
+        app:layout_constraintBottom_toTopOf="@+id/bodyPulse"
+        app:layout_constraintStart_toEndOf="@+id/bodyTmpText"
+        app:layout_constraintTop_toTopOf="@+id/bodyTmpText"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/bodyPulse"
+        app:layout_constraintBottom_toTopOf="@+id/breathFreq"
+        app:layout_constraintEnd_toEndOf="@+id/bodyTempLabel"
+        app:layout_constraintStart_toStartOf="@+id/bodyTempLabel"
+        app:layout_constraintTop_toTopOf="@+id/bodyPulse" />
+
+    <EditText
+        android:id="@+id/bodyPulse"
+        android:layout_width="82dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:text="pulse"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/bodyTmpText"
+        app:layout_constraintStart_toStartOf="@+id/bodyTmpText"
+        app:layout_constraintTop_toBottomOf="@+id/bodyTmpText" />
+
+    <TextView
+        android:id="@+id/perMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/perMin"
+        app:layout_constraintBottom_toTopOf="@+id/breathFreq"
+        app:layout_constraintEnd_toEndOf="@+id/textView9"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/bodyPulse"
+        app:layout_constraintTop_toTopOf="@+id/bodyPulse"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/breathFreq"
+        app:layout_constraintBottom_toTopOf="@+id/bloodRelease"
+        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/breathFreq" />
+
+    <EditText
+        android:id="@+id/breathFreq"
+        android:layout_width="81dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:text="Breath"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/bodyPulse"
+        app:layout_constraintStart_toStartOf="@+id/bodyPulse"
+        app:layout_constraintTop_toBottomOf="@+id/bodyPulse" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/perMin"
+        app:layout_constraintBottom_toTopOf="@+id/bloodRelease"
+        app:layout_constraintEnd_toEndOf="@+id/perMin"
+        app:layout_constraintStart_toEndOf="@+id/breathFreq"
+        app:layout_constraintTop_toTopOf="@+id/breathFreq" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/bloodRelease"
+        app:layout_constraintBottom_toTopOf="@+id/bloodTense"
+        app:layout_constraintEnd_toEndOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/bloodRelease" />
+
+    <EditText
+        android:id="@+id/bloodRelease"
+        android:layout_width="81dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:text="Blood Release"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/breathFreq"
+        app:layout_constraintStart_toStartOf="@+id/breathFreq"
+        app:layout_constraintTop_toBottomOf="@+id/breathFreq" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/mmHg"
+        app:layout_constraintBottom_toTopOf="@+id/bloodTense"
+        app:layout_constraintStart_toEndOf="@+id/bloodRelease"
+        app:layout_constraintTop_toTopOf="@+id/bloodRelease" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/bloodTense"
+        app:layout_constraintBottom_toTopOf="@+id/bGas"
+        app:layout_constraintEnd_toEndOf="@+id/textView14"
+        app:layout_constraintStart_toStartOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="@+id/bloodTense" />
+
+    <EditText
+        android:id="@+id/bloodTense"
+        android:layout_width="81dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="Blood Tense"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/bloodRelease"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/bloodRelease"
+        app:layout_constraintTop_toBottomOf="@+id/bloodRelease" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/mmHg"
+        app:layout_constraintBottom_toTopOf="@+id/bGas"
+        app:layout_constraintStart_toEndOf="@+id/bloodTense"
+        app:layout_constraintTop_toTopOf="@+id/bloodTense" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bloodGas"
+        app:layout_constraintBottom_toBottomOf="@+id/bGas"
+        app:layout_constraintEnd_toEndOf="@+id/textView16"
+        app:layout_constraintStart_toStartOf="@+id/textView16"
+        app:layout_constraintTop_toTopOf="@+id/bGas" />
+
+    <EditText
+        android:id="@+id/bGas"
+        android:layout_width="81dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/bloodTense"
+        app:layout_constraintStart_toStartOf="@+id/bloodTense"
+        app:layout_constraintTop_toBottomOf="@+id/bloodTense" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/pH"
+        app:layout_constraintBottom_toBottomOf="@+id/bGas"
+        app:layout_constraintStart_toEndOf="@+id/bGas"
+        app:layout_constraintTop_toTopOf="@+id/bGas" />
+
 </android.support.constraint.ConstraintLayout>

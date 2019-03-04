@@ -1,10 +1,25 @@
 <resources>
-    <string name="app_name">MediClient</string>
+    <string name="app_name">病哩病哩</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_display_patient">DisplayPatientActivity</string>
+    <string name="title_activity_main">病哩病哩</string>
+    <string name="title_activity_display_patient">患者信息</string>
     <string name="patientName">姓名</string>
     <string name="patientAge">年龄</string>
     <string name="serverAddress">服务器地址</string>
     <string name="id">查询ID</string>
     <string name="query">查询</string>
+    <string name="patientSex">性别</string>
+    <string name="patientNFC">ID</string>
+    <string name="demoInfo">个人信息</string>
+    <string name="patientDoc">主治医师</string>
+    <string name="pathologicalData">病理数据</string>
+    <string name="bodyTmp">体温</string>
+    <string name="perMin">/分钟</string>
+    <string name="bodyPulse">脉搏</string>
+    <string name="breathFreq">呼吸</string>
+    <string name="bloodRelease">血压舒张压</string>
+    <string name="mmHg">毫米汞柱</string>
+    <string name="bloodTense">血压收缩压</string>
+    <string name="bloodGas">血气分析</string>
+    <string name="pH">pH</string>
 </resources>

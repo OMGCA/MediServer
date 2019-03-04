@@ -29,6 +29,7 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_PATIENT = "com.xiatstudio.mediclient.PATIENT";
+    public static final String EXTRA_SERVERADDR = "com.xiatstudio.mediclient.SERVERADDR";
     public static Patient retrievedPatient = new Patient("NULL");
 
     @Override
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 /* 发起新Activity,将Patient类发送给新Activity */
-                displayPatient(view, p);
+                displayPatient(view, p, serverAddress);
 
             }
         });
@@ -90,12 +91,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /* 此方法用来发起DisplayPatientActivity，来显示Patient信息 */
-    public void displayPatient(View view, Patient p) {
+    public void displayPatient(View view, Patient p, String serverAddr) {
         Intent intent = new Intent(this, DisplayPatientActivity.class);
 
         /* 新建Bundle,使用Serializable给下一个Activity传送Patient类 */
         Bundle bundle = new Bundle();
         bundle.putSerializable(EXTRA_PATIENT,p);
+
+        intent.putExtra(EXTRA_SERVERADDR,serverAddr);
 
         intent.putExtras(bundle);
         startActivity(intent);

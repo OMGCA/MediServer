@@ -1,10 +1,25 @@
 <resources>
-    <string name="app_name">MediClient</string>
+    <string name="app_name">ビンリビンリ</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_display_patient">DisplayPatientActivity</string>
+    <string name="title_activity_main">ビンリビンリ</string>
+    <string name="title_activity_display_patient">患者情報</string>
     <string name="patientName">名前</string>
     <string name="patientAge">年齢</string>
     <string name="serverAddress">サーバーアドレス</string>
     <string name="id">NFC ID</string>
     <string name="query">サーチ</string>
+    <string name="patientSex">性别</string>
+    <string name="patientNFC">ID</string>
+    <string name="demoInfo">個人情報</string>
+    <string name="patientDoc">主治医</string>
+    <string name="pathologicalData">病理データ</string>
+    <string name="bodyTmp">体温</string>
+    <string name="perMin">/分</string>
+    <string name="bodyPulse">パルス</string>
+    <string name="breathFreq">呼吸</string>
+    <string name="bloodRelease">拡張期血圧</string>
+    <string name="mmHg">ミリメートル水銀</string>
+    <string name="bloodTense">収縮期血圧</string>
+    <string name="bloodGas">血液ガス分析</string>
+    <string name="pH">pH</string>
 </resources>

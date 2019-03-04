@@ -15,7 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/design_default_color_primary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -33,61 +33,52 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@string/serverAddress"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.054"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.083" />
+            app:layout_constraintTop_toTopOf="@+id/serverAddress"
+            app:layout_constraintVertical_bias="0.006" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@string/id"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.046"
+            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintHorizontal_bias="0.421"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.169" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.025" />
 
         <EditText
             android:id="@+id/serverAddress"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="28dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="120.78.160.93"
-            app:layout_constraintBottom_toTopOf="@+id/patientIDText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.888"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView2"
-            app:layout_constraintVertical_bias="0.478" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/patientIDText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="16dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="01"
-            app:layout_constraintBottom_toTopOf="@+id/queryButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.983"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            app:layout_constraintEnd_toEndOf="@+id/serverAddress"
+            app:layout_constraintStart_toStartOf="@+id/serverAddress"
+            app:layout_constraintTop_toBottomOf="@+id/serverAddress" />
 
         <Button
             android:id="@+id/queryButton"
@@ -101,9 +92,10 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patientIDText" />
+            app:layout_constraintTop_toBottomOf="@+id/patientIDText"
+            app:layout_constraintVertical_bias="0.0" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -1,10 +1,25 @@
 <resources>
-    <string name="app_name">MediClient</string>
+    <string name="app_name">Binlibinli</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_display_patient">DisplayPatientActivity</string>
+    <string name="title_activity_main">Binlibinli</string>
+    <string name="title_activity_display_patient">Patient Info</string>
     <string name="patientName">Name</string>
     <string name="patientAge">Age</string>
     <string name="serverAddress">Server Address</string>
     <string name="id">NFC ID</string>
     <string name="query">Query</string>
+    <string name="patientSex">Sex</string>
+    <string name="patientNFC">ID</string>
+    <string name="demoInfo">Personal Info</string>
+    <string name="patientDoc">Main Doctor</string>
+    <string name="pathologicalData">Pathological Data</string>
+    <string name="bodyTmp">Body Temp</string>
+    <string name="perMin">/min</string>
+    <string name="bodyPulse">Pulse</string>
+    <string name="breathFreq">Breath</string>
+    <string name="bloodRelease">Diastolic Blood Pressure</string>
+    <string name="mmHg">mmHg</string>
+    <string name="bloodTense">Systolic blood pressure</string>
+    <string name="bloodGas">Blood Gas Analysis</string>
+    <string name="pH">pH</string>
 </resources>
