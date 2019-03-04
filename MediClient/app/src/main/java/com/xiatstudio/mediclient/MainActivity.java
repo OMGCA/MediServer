@@ -13,6 +13,8 @@ import java.util.concurrent.Future;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -26,7 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "com.xiatstudio.mediclient.MESSAGE";
+    public static final String EXTRA_PATIENT = "com.xiatstudio.mediclient.PATIENT";
     public static Patient retrievedPatient = new Patient("NULL");
 
     @Override
@@ -89,12 +91,13 @@ public class MainActivity extends AppCompatActivity {
 
     /* 此方法用来发起DisplayPatientActivity，来显示Patient信息 */
     public void displayPatient(View view, Patient p) {
-        Intent intent = new Intent(this, DisplayPatientActivity.class);
+        Intent intent = new Intent(this, DisplayPatientActivity.class)；
 
-        /* 测试代码，仅发送病人名字 */
-        String patientName = p.getName();
+        /* 新建Bundle,使用Serializable给下一个Acitivity传送Patient类 */
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(EXTRA_PATIENT,p);
 
-        intent.putExtra(EXTRA_MESSAGE, patientName);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 

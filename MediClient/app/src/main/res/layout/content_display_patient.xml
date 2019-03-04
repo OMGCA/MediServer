@@ -9,10 +9,49 @@
     tools:showIn="@layout/activity_display_patient">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/patientNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="60dp"
+        android:text="姓名"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/patientAgeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="124dp"
+        android:text="年龄"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/patientNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/patientNameLabel"
+        app:layout_constraintStart_toEndOf="@+id/patientNameLabel"
+        app:layout_constraintTop_toTopOf="@+id/patientNameLabel" />
+
+    <EditText
+        android:id="@+id/patientAgeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/patientAgeLabel"
+        app:layout_constraintEnd_toEndOf="@+id/patientNameText"
+        app:layout_constraintStart_toStartOf="@+id/patientNameText"
+        app:layout_constraintTop_toTopOf="@+id/patientAgeLabel"
+        app:layout_constraintVertical_bias="0.0" />
 </android.support.constraint.ConstraintLayout>

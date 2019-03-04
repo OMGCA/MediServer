@@ -7,10 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class DisplayPatientActivity extends AppCompatActivity {
@@ -24,12 +21,17 @@ public class DisplayPatientActivity extends AppCompatActivity {
 
         /* 新建Intent */
         Intent intent = getIntent();
-        String patientName = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+
+        /* 接收从MainActivity中传输的Patient类 */
+        Bundle bundle = intent.getExtras();
+        Patient patient = (Patient) bundle.getSerializable(MainActivity.EXTRA_PATIENT);
 
         /* 得到新页面文本部件ID */
-        TextView textView = findViewById(R.id.textView3);
-        /* 将Patient姓名显示在上面 */
-        textView.setText(patientName);
+        EditText etPatientName = findViewById(R.id.patientNameText);
+        EditText etPatientAge = findViewById(R.id.patientAgeText);
+
+        etPatientName.setText(patient.getName());
+        etPatientAge.setText(String.valueOf(patient.getAge()));
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
