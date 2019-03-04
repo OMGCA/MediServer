@@ -2,4 +2,9 @@
     <string name="app_name">MediClient</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_display_patient">DisplayPatientActivity</string>
+    <string name="patientName">姓名</string>
+    <string name="patientAge">年龄</string>
+    <string name="serverAddress">服务器地址</string>
+    <string name="id">查询ID</string>
+    <string name="query">查询</string>
 </resources>

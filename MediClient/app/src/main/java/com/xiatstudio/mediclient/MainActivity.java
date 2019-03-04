@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
 
     /* 此方法用来发起DisplayPatientActivity，来显示Patient信息 */
     public void displayPatient(View view, Patient p) {
-        Intent intent = new Intent(this, DisplayPatientActivity.class)；
+        Intent intent = new Intent(this, DisplayPatientActivity.class);
 
-        /* 新建Bundle,使用Serializable给下一个Acitivity传送Patient类 */
+        /* 新建Bundle,使用Serializable给下一个Activity传送Patient类 */
         Bundle bundle = new Bundle();
         bundle.putSerializable(EXTRA_PATIENT,p);
 

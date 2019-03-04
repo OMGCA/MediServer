@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MediClient</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_display_patient">DisplayPatientActivity</string>
+    <string name="patientName">名前</string>
+    <string name="patientAge">年齢</string>
+    <string name="serverAddress">サーバーアドレス</string>
+    <string name="id">NFC ID</string>
+    <string name="query">サーチ</string>
+</resources>
