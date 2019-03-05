@@ -25,4 +25,8 @@
     <string name="dialog_server_timeout">Server not found or connection timeout</string>
     <string name="OK">OK</string>
     <string name="dismiss">Dismiss</string>
+    <string name="patientSent">Patient info has been sent to the server.</string>
+    <string name="sendingPatient">Sending patient info...</string>
+    <string name="addPatient">Add</string>
+    <string name="serverOut">Server not found or connection timeout.</string>
 </resources>

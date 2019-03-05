@@ -25,4 +25,8 @@
     <string name="dialog_server_timeout">サーバーが見つからないか接続がタイムアウトしました</string>
     <string name="OK">はい</string>
     <string name="dismiss">キャンセル</string>
+    <string name="patientSent">患者情報がサーバーに送信されました</string>
+    <string name="sendingPatient">患者情報をアップロードする...</string>
+    <string name="addPatient">追加する</string>
+    <string name="serverOut">サーバーが見つからないか、接続がタイムアウトしました。</string>
 </resources>

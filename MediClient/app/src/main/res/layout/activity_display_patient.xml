@@ -41,6 +41,6 @@
         android:layout_margin="@dimen/fab_margin"
         android:visibility="invisible"
         app:backgroundTint="@color/colorAccent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/stat_sys_upload" />
 
 </android.support.design.widget.CoordinatorLayout>

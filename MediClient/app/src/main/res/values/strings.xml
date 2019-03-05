@@ -25,4 +25,8 @@
     <string name="dialog_server_timeout">服务器不存在或响应超时</string>
     <string name="OK">知道了</string>
     <string name="dismiss">取消</string>
+    <string name="patientSent">病人信息已发送至服务器.</string>
+    <string name="sendingPatient">正在上传病人信息...</string>
+    <string name="addPatient">新增</string>
+    <string name="serverOut">服务器不存在或连接超时</string>
 </resources>

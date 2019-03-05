@@ -10,9 +10,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.EditText;
 
 import java.io.ObjectOutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class DisplayPatientActivity extends AppCompatActivity {
@@ -85,6 +87,10 @@ public class DisplayPatientActivity extends AppCompatActivity {
 
         /* 设置编辑按钮行为 */
         FloatingActionButton fab = findViewById(R.id.fab);
+        Animation anim = android.view.animation.AnimationUtils.loadAnimation(fab.getContext(),  R.anim.shake);
+        anim.setDuration(200L);
+        fab.startAnimation(anim);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -109,6 +115,9 @@ public class DisplayPatientActivity extends AppCompatActivity {
                 FloatingActionButton fab2 = findViewById(R.id.sendPatient);
                 /* 使按钮可见 */
                 fab2.setVisibility(View.VISIBLE);
+                Animation anim = android.view.animation.AnimationUtils.loadAnimation(fab2.getContext(),  R.anim.shake);
+                anim.setDuration(200L);
+                fab2.startAnimation(anim);
                 fab2.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View view){
@@ -164,7 +173,8 @@ public class DisplayPatientActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(String... params) {
             try{
-                Socket socket = new Socket(this.serverAddress, 34168);
+                Socket socket = new Socket();
+                socket.connect(new InetSocketAddress(this.serverAddress,34168),2000);
 
                 /* 准备发送至服务器的Patient类 */
                 ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());
@@ -174,16 +184,18 @@ public class DisplayPatientActivity extends AppCompatActivity {
 
                 outStream.close();
                 socket.close();
+                return true;
             } catch (Exception e){
                 e.printStackTrace();
+                return false;
             }
 
-            return true;
+
         }
 
         @Override
         protected void onPreExecute(){
-            this.dialog.setMessage("Sending patient info");
+            this.dialog.setMessage(getString(R.string.sendingPatient));
             this.dialog.setCancelable(false);
             this.dialog.show();
         }
@@ -193,9 +205,10 @@ public class DisplayPatientActivity extends AppCompatActivity {
             if(this.dialog.isShowing())
                 this.dialog.dismiss();
 
-            Snackbar.make(findViewById(R.id.myCoordinatorLayout), "病人信息已发送",
-                    Snackbar.LENGTH_SHORT)
-                    .show();
+            if(result)
+                Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.patientSent,Snackbar.LENGTH_SHORT).show();
+            else
+                Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut,Snackbar.LENGTH_SHORT).show();
         }
 
     /* 2019年3月5日更新 */
@@ -213,7 +226,8 @@ public class DisplayPatientActivity extends AppCompatActivity {
         @Override
         public void run(){
             try{
-                Socket socket = new Socket(serverAddress, 34168);
+                Socket socket = new Socket();
+                socket.connect(new InetSocketAddress(this.serverAddress,34168),2000);
 
                 /* 准备发送至服务器的Patient类 */
                 ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());

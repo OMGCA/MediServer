@@ -2,6 +2,7 @@ package com.xiatstudio.mediclient;
 
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -12,6 +13,7 @@ import java.util.concurrent.Future;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -32,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        Button addButton = findViewById(R.id.addButton);
+
 
 
         /* 从UI中得到文本区部件 */
@@ -40,9 +43,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText serverAdd = findViewById(R.id.serverAddress);
 
 
-
-
-        fab.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Patient emptyPatient = new Patient(" ");
@@ -75,16 +76,24 @@ public class MainActivity extends AppCompatActivity {
                 /* 若无法接收，则建立空Patient以防程序崩溃 */
                 try {
                     p = (Patient) f1.get();
+                    /* 发起新Activity,将Patient类发送给新Activity */
+                    displayPatient(view, p, serverAddress);
                 } catch (ExecutionException e) {
                     p = new Patient("NULL");
+                    Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut,
+                            Snackbar.LENGTH_SHORT)
+                            .show();
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     p = new Patient("NULL");
+                    Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut,
+                            Snackbar.LENGTH_SHORT)
+                            .show();
                     e.printStackTrace();
                 }
 
-                /* 发起新Activity,将Patient类发送给新Activity */
-                displayPatient(view, p, serverAddress);
+
+
 
             }
         });
@@ -144,7 +153,8 @@ public class MainActivity extends AppCompatActivity {
         public Patient call() throws Exception {
             try {
                 /* 与服务器建立连接 */
-                Socket client = new Socket(this.serverAddress, 34167);
+                Socket client = new Socket();
+                client.connect(new InetSocketAddress(this.serverAddress,34167),2000);
 
                 /* 将查询ID发送至服务器 */
                 /* NFC版中则是将NFC标签ID发送给服务器，此处代码应该不会有较大改动 */
@@ -161,6 +171,9 @@ public class MainActivity extends AppCompatActivity {
                 client.close();
 
             } catch (Exception e) {
+                Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut,
+                        Snackbar.LENGTH_SHORT)
+                        .show();
                 e.printStackTrace();
             }
 
