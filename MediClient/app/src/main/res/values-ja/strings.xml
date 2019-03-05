@@ -18,7 +18,7 @@
     <string name="bodyPulse">パルス</string>
     <string name="breathFreq">呼吸</string>
     <string name="bloodRelease">拡張期血圧</string>
-    <string name="mmHg">ミリメートル水銀</string>
+    <string name="mmHg">mmHg</string>
     <string name="bloodTense">収縮期血圧</string>
     <string name="bloodGas">血液ガス分析</string>
     <string name="pH">pH</string>
@@ -32,4 +32,14 @@
     <string name="nfcWritten">NFC数据读取成功</string>
     <string name="ndefGetFail">没有获得NDEF实例</string>
     <string name="nfcWarning">このデバイスはNFCをサポートしていません</string>
+    <string name="nfcChecking">NFCステータスの確認中...</string>
+    <string name="bloodNa">血 Na</string>
+    <string name="bloodK">血 K</string>
+    <string name="mmolPerL">mmol/L</string>
+    <string name="notes">その他の注意</string>
+    <string name="pathoReport">病理レポート</string>
+    <string name="ECG">心電図備考</string>
+    <string name="docNote">医療命令</string>
+    <string name="opPending">手術の種類</string>
+    <string name="imaging">イメージング結果</string>
 </resources>

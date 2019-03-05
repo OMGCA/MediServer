@@ -12,6 +12,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -33,6 +34,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends BaseNfcActivity {
     public static final String EXTRA_PATIENT = "com.xiatstudio.mediclient.PATIENT";
     public static final String EXTRA_SERVERADDR = "com.xiatstudio.mediclient.SERVERADDR";
@@ -41,7 +44,6 @@ public class MainActivity extends BaseNfcActivity {
 
     private String mTagText;
     /* 从UI中得到文本区部件 */
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +56,18 @@ public class MainActivity extends BaseNfcActivity {
 
         patientID = findViewById(R.id.patientIDText);
         final EditText serverAdd = findViewById(R.id.serverAddress);
+        View contextView = findViewById(R.id.myCoordinatorLayout);
 
-        if(!isNFCSupported()){
-            Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.nfcWarning,
-                    Snackbar.LENGTH_SHORT)
-                    .show();
+        Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.nfcChecking, Snackbar.LENGTH_SHORT).show();
+
+        if (!isNFCSupported()) {
+            Snackbar snack = Snackbar.make(contextView, R.string.nfcWarning, Snackbar.LENGTH_LONG);
+
+            TextView tv = (TextView) snack.getView().findViewById(android.support.design.R.id.snackbar_text);
+            tv.setTextColor(Color.parseColor("#fcf653"));
+            snack.show();
+
         }
-
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,14 +106,12 @@ public class MainActivity extends BaseNfcActivity {
                     displayPatient(view, p, serverAddress);
                 } catch (ExecutionException e) {
                     p = new Patient("NULL");
-                    Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut,
-                            Snackbar.LENGTH_SHORT)
+                    Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut, Snackbar.LENGTH_SHORT)
                             .show();
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     p = new Patient("NULL");
-                    Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut,
-                            Snackbar.LENGTH_SHORT)
+                    Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut, Snackbar.LENGTH_SHORT)
                             .show();
                     e.printStackTrace();
                 }
@@ -116,16 +121,15 @@ public class MainActivity extends BaseNfcActivity {
 
     }
 
-
     /* 此方法用来发起DisplayPatientActivity，来显示Patient信息 */
     public void displayPatient(View view, Patient p, String serverAddr) {
         Intent intent = new Intent(this, DisplayPatientActivity.class);
 
         /* 新建Bundle,使用Serializable给下一个Activity传送Patient类 */
         Bundle bundle = new Bundle();
-        bundle.putSerializable(EXTRA_PATIENT,p);
+        bundle.putSerializable(EXTRA_PATIENT, p);
 
-        intent.putExtra(EXTRA_SERVERADDR,serverAddr);
+        intent.putExtra(EXTRA_SERVERADDR, serverAddr);
 
         intent.putExtras(bundle);
         startActivity(intent);
@@ -153,84 +157,82 @@ public class MainActivity extends BaseNfcActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public boolean isNFCSupported(){
+    public boolean isNFCSupported() {
         NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        if(nfcAdapter != null)
+        if (nfcAdapter != null)
             return true;
         else
             return false;
     }
+
     @Override
-    public void onNewIntent(Intent intent){
+    public void onNewIntent(Intent intent) {
         Tag detectedTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
         Ndef ndef = Ndef.get(detectedTag);
 
-        if(ndef != null){
-            mTagText = ndef.getType() + "\nmaxsize:" +ndef.getMaxSize() + "bytes\n\n";
+        if (ndef != null) {
+            mTagText = ndef.getType() + "\nmaxsize:" + ndef.getMaxSize() + "bytes\n\n";
             readNfcTag(intent);
             patientID.setText(mTagText);
-        }else{
-            Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.ndefGetFail,
-                    Snackbar.LENGTH_SHORT)
-                    .show();
+        } else {
+            Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.ndefGetFail, Snackbar.LENGTH_SHORT).show();
         }
     }
 
-    private void readNfcTag(Intent intent){
-        if(NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())){
+    private void readNfcTag(Intent intent) {
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
             Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
 
             NdefMessage msgs[] = null;
 
             int contentSize = 0;
-            if(rawMsgs != null){
+            if (rawMsgs != null) {
                 msgs = new NdefMessage[rawMsgs.length];
-                for(int i = 0; i < rawMsgs.length; i++){
+                for (int i = 0; i < rawMsgs.length; i++) {
                     msgs[i] = (NdefMessage) rawMsgs[i];
                     contentSize += msgs[i].toByteArray().length;
                 }
             }
 
-            try{
-                if(msgs != null){
+            try {
+                if (msgs != null) {
                     NdefRecord record = msgs[0].getRecords()[0];
                     String textRecord = parseTextRecord(record);
                     mTagText += textRecord + "\n\ntext\n" + contentSize + " bytes";
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static String parseTextRecord(NdefRecord ndefRecord){
-        if(ndefRecord.getTnf() != NdefRecord.TNF_WELL_KNOWN){
+    public static String parseTextRecord(NdefRecord ndefRecord) {
+        if (ndefRecord.getTnf() != NdefRecord.TNF_WELL_KNOWN) {
             return null;
         }
 
-        if(!Arrays.equals(ndefRecord.getType(), NdefRecord.RTD_TEXT)){
+        if (!Arrays.equals(ndefRecord.getType(), NdefRecord.RTD_TEXT)) {
             return null;
         }
 
-        try{
+        try {
             byte[] payload = ndefRecord.getPayload();
 
             String textEncoding = ((payload[0] & 0x80) == 0) ? "UTF-8" : "UTF-16";
 
             int langCodeLength = payload[0] & 0x3f;
 
-            String langCode = new String(payload,1,langCodeLength,"US-ASCII");
+            String langCode = new String(payload, 1, langCodeLength, "US-ASCII");
 
-            String textRecord = new String(payload, langCodeLength + 1, payload.length - langCodeLength - 1, textEncoding);
+            String textRecord = new String(payload, langCodeLength + 1, payload.length - langCodeLength - 1,
+                    textEncoding);
 
             return textRecord;
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new IllegalArgumentException();
         }
     }
-
-
 
     /* 2019年3月3日凌晨更新：此方法用来代替先前使用的Thread */
     /* 同样为线程，Callable可定义返回值 */
@@ -249,7 +251,7 @@ public class MainActivity extends BaseNfcActivity {
             try {
                 /* 与服务器建立连接 */
                 Socket client = new Socket();
-                client.connect(new InetSocketAddress(this.serverAddress,34167),2000);
+                client.connect(new InetSocketAddress(this.serverAddress, 34167), 2000);
 
                 /* 将查询ID发送至服务器 */
                 /* NFC版中则是将NFC标签ID发送给服务器，此处代码应该不会有较大改动 */
@@ -266,9 +268,7 @@ public class MainActivity extends BaseNfcActivity {
                 client.close();
 
             } catch (Exception e) {
-                Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut,
-                        Snackbar.LENGTH_SHORT)
-                        .show();
+                Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut, Snackbar.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
 
@@ -309,6 +309,5 @@ public class MainActivity extends BaseNfcActivity {
         }
 
     }
-
 
 }

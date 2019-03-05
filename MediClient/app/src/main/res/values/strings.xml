@@ -18,7 +18,7 @@
     <string name="bodyPulse">脉搏</string>
     <string name="breathFreq">呼吸</string>
     <string name="bloodRelease">血压舒张压</string>
-    <string name="mmHg">毫米汞柱</string>
+    <string name="mmHg">mmHg</string>
     <string name="bloodTense">血压收缩压</string>
     <string name="bloodGas">血气分析</string>
     <string name="pH">pH</string>
@@ -32,4 +32,14 @@
     <string name="nfcWritten">NFC数据读取成功</string>
     <string name="ndefGetFail">没有获得NDEF实例</string>
     <string name="nfcWarning">该设备不支持NFC标签读取功能</string>
+    <string name="nfcChecking">正在检查NFC状态...</string>
+    <string name="bloodNa">血钠</string>
+    <string name="bloodK">血钾</string>
+    <string name="mmolPerL">mmol/L</string>
+    <string name="notes">其他备注</string>
+    <string name="opPending">手术类型</string>
+    <string name="pathoReport">病理报告</string>
+    <string name="imaging">影像学结果</string>
+    <string name="ECG">心电图备注</string>
+    <string name="docNote">医嘱</string>
 </resources>

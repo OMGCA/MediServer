@@ -19,7 +19,7 @@
     <string name="breathFreq">Breath</string>
     <string name="bloodRelease">Diastolic Blood Pressure</string>
     <string name="mmHg">mmHg</string>
-    <string name="bloodTense">Systolic blood pressure</string>
+    <string name="bloodTense">Systolic Blood Pressure</string>
     <string name="bloodGas">Blood Gas Analysis</string>
     <string name="pH">pH</string>
     <string name="dialog_server_timeout">Server not found or connection timeout</string>
@@ -32,4 +32,14 @@
     <string name="nfcWritten">NFC data has been read successfully.</string>
     <string name="ndefGetFail">No NDEF instance was found.</string>
     <string name="nfcWarning">This device doesn\'t support NFC.</string>
+    <string name="nfcChecking">Checking NFC status...</string>
+    <string name="bloodNa">Blood - Na</string>
+    <string name="bloodK">Blood - K</string>
+    <string name="mmolPerL">mmol/L</string>
+    <string name="notes">Other Notes</string>
+    <string name="pathoReport">Pathology Report</string>
+    <string name="ECG">ECG Comments</string>
+    <string name="docNote">Doctor\'s Note</string>
+    <string name="opPending">Operation Pending</string>
+    <string name="imaging">Imaging Report</string>
 </resources>

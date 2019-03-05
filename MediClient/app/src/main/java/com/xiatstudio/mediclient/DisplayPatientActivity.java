@@ -26,6 +26,8 @@ public class DisplayPatientActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         /* 新建Intent */
         final Intent intent = getIntent();
 
@@ -35,48 +37,55 @@ public class DisplayPatientActivity extends AppCompatActivity {
 
         /* 得到Activity页面中EditText部件id并初始设置为不可编辑 */
         final EditText etPatientName = findViewById(R.id.patientNameText);
-        etSetEditable(etPatientName,false);
+        etSetEditable(etPatientName, false);
 
         final EditText etPatientAge = findViewById(R.id.patientAgeText);
-        etSetEditable(etPatientAge,false);
+        etSetEditable(etPatientAge, false);
 
         final EditText etPatientSex = findViewById(R.id.patientSexText);
-        etSetEditable(etPatientSex,false);
+        etSetEditable(etPatientSex, false);
 
         final EditText etPatientNFC = findViewById(R.id.patientNFC);
-        etSetEditable(etPatientNFC,false);
+        etSetEditable(etPatientNFC, false);
 
         final EditText etPatientDoc = findViewById(R.id.patientDoc);
-        etSetEditable(etPatientDoc,false);
+        etSetEditable(etPatientDoc, false);
 
         /* 将病人信息显示其中 */
         etPatientName.setText(patient.getName());
         etPatientAge.setText(String.valueOf(patient.getAge()));
         etPatientSex.setText(patient.getSex());
         etPatientNFC.setText(patient.getSlotID());
-        etPatientDoc.setText(patient.getDoc());etPatientName.setText(patient.getName());
+        etPatientDoc.setText(patient.getDoc());
+        etPatientName.setText(patient.getName());
         etPatientAge.setText(String.valueOf(patient.getAge()));
         etPatientSex.setText(patient.getSex());
         etPatientNFC.setText(patient.getSlotID());
         etPatientDoc.setText(patient.getDoc());
 
         final EditText etBodyTmp = findViewById(R.id.bodyTmpText);
-        etSetEditable(etBodyTmp,false);
+        etSetEditable(etBodyTmp, false);
 
         final EditText etBodyPulse = findViewById(R.id.bodyPulse);
-        etSetEditable(etBodyPulse,false);
+        etSetEditable(etBodyPulse, false);
 
         final EditText etBreathFreq = findViewById(R.id.breathFreq);
-        etSetEditable(etBreathFreq,false);
+        etSetEditable(etBreathFreq, false);
 
         final EditText etBloodRelease = findViewById(R.id.bloodRelease);
-        etSetEditable(etBloodRelease,false);
+        etSetEditable(etBloodRelease, false);
 
         final EditText etBloodTense = findViewById(R.id.bloodTense);
-        etSetEditable(etBloodTense,false);
+        etSetEditable(etBloodTense, false);
 
         final EditText etBloodGas = findViewById(R.id.bGas);
-        etSetEditable(etBloodGas,false);
+        etSetEditable(etBloodGas, false);
+
+        final EditText etBloodNa = findViewById(R.id.bloodNa);
+        etSetEditable(etBloodNa, false);
+
+        final EditText etBloodK = findViewById(R.id.bloodK);
+        etSetEditable(etBloodK, false);
 
         etBodyTmp.setText(String.valueOf(patient.getBodyTemp()));
         etBodyPulse.setText(String.valueOf(patient.getPulse()));
@@ -84,10 +93,34 @@ public class DisplayPatientActivity extends AppCompatActivity {
         etBloodRelease.setText(String.valueOf(patient.getReleasePressure()));
         etBloodTense.setText(String.valueOf(patient.getTensePressure()));
         etBloodGas.setText(String.valueOf(patient.getBgAnalysis()));
+        etBloodNa.setText(String.valueOf(patient.getBloodNa()));
+        etBloodK.setText(String.valueOf(patient.getBloodK()));
+
+        final EditText etOpPending = findViewById(R.id.opPending);
+        etSetEditable(etOpPending, false);
+
+        final EditText etPathoReport = findViewById(R.id.pathoReport);
+        etSetEditable(etPathoReport, false);
+
+        final EditText etImaging = findViewById(R.id.imaging);
+        etSetEditable(etImaging, false);
+
+        final EditText etECG = findViewById(R.id.ECG);
+        etSetEditable(etECG, false);
+
+        final EditText etDocNote = findViewById(R.id.docNote);
+        etSetEditable(etDocNote, false);
+
+        etOpPending.setText(patient.getOpPending());
+        etPathoReport.setText(patient.getPathologyResult());
+        etImaging.setText(patient.getImaging());
+        etECG.setText(patient.getECG());
+        etDocNote.setText(patient.getDocNote());
+
 
         /* 设置编辑按钮行为 */
         FloatingActionButton fab = findViewById(R.id.fab);
-        Animation anim = android.view.animation.AnimationUtils.loadAnimation(fab.getContext(),  R.anim.shake);
+        Animation anim = android.view.animation.AnimationUtils.loadAnimation(fab.getContext(), R.anim.shake);
         anim.setDuration(200L);
         fab.startAnimation(anim);
 
@@ -96,31 +129,39 @@ public class DisplayPatientActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 /* 解锁文本框编辑 */
-                etSetEditable(etPatientName,true);
-                etSetEditable(etPatientAge,true);
-                etSetEditable(etPatientSex,true);
-                etSetEditable(etPatientNFC,true);
-                etSetEditable(etPatientDoc,true);
+                etSetEditable(etPatientName, true);
+                etSetEditable(etPatientAge, true);
+                etSetEditable(etPatientSex, true);
+                etSetEditable(etPatientNFC, true);
+                etSetEditable(etPatientDoc, true);
 
-                etSetEditable(etBodyTmp,true);
-                etSetEditable(etBodyPulse,true);
-                etSetEditable(etBreathFreq,true);
-                etSetEditable(etBodyPulse,true);
-                etSetEditable(etBreathFreq,true);
-                etSetEditable(etBloodRelease,true);
-                etSetEditable(etBloodTense,true);
-                etSetEditable(etBloodGas,true);
+                etSetEditable(etBodyTmp, true);
+                etSetEditable(etBodyPulse, true);
+                etSetEditable(etBreathFreq, true);
+                etSetEditable(etBodyPulse, true);
+                etSetEditable(etBreathFreq, true);
+                etSetEditable(etBloodRelease, true);
+                etSetEditable(etBloodTense, true);
+                etSetEditable(etBloodGas, true);
+                etSetEditable(etBloodNa, true);
+                etSetEditable(etBloodK, true);
+
+                etSetEditable(etOpPending, true);
+                etSetEditable(etPathoReport, true);
+                etSetEditable(etImaging, true);
+                etSetEditable(etECG, true);
+                etSetEditable(etDocNote, true);
 
                 /* 设定发送病人信息按钮行为 */
                 FloatingActionButton fab2 = findViewById(R.id.sendPatient);
                 /* 使按钮可见 */
                 fab2.setVisibility(View.VISIBLE);
-                Animation anim = android.view.animation.AnimationUtils.loadAnimation(fab2.getContext(),  R.anim.shake);
+                Animation anim = android.view.animation.AnimationUtils.loadAnimation(fab2.getContext(), R.anim.shake);
                 anim.setDuration(200L);
                 fab2.startAnimation(anim);
-                fab2.setOnClickListener(new View.OnClickListener(){
+                fab2.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view){
+                    public void onClick(View view) {
                         /* 建立新的Patient类，准备发送至服务器 */
                         Patient patientToSend = new Patient(etPatientName.getText().toString());
                         patientToSend.setAge(Integer.parseInt(etPatientAge.getText().toString()));
@@ -134,16 +175,19 @@ public class DisplayPatientActivity extends AppCompatActivity {
                         patientToSend.setReleasePressure(Integer.parseInt(etBloodRelease.getText().toString()));
                         patientToSend.setTensePressure(Integer.parseInt(etBloodTense.getText().toString()));
                         patientToSend.setBgAnalysis(Double.parseDouble(etBloodGas.getText().toString()));
+                        patientToSend.setBloodNa(Integer.parseInt(etBloodNa.getText().toString()));
+                        patientToSend.setBloodK(Double.parseDouble(etBloodK.getText().toString()));
 
                         /* 初始化并启动发送病人线程 */
-                        //DisplayPatientActivity threadRun = new DisplayPatientActivity();
+                        // DisplayPatientActivity threadRun = new DisplayPatientActivity();
 
-                        //DisplayPatientActivity.SendPatientThread sendPatient = threadRun.new SendPatientThread(intent.getStringExtra(MainActivity.EXTRA_SERVERADDR),patientToSend);
+                        // DisplayPatientActivity.SendPatientThread sendPatient = threadRun.new
+                        // SendPatientThread(intent.getStringExtra(MainActivity.EXTRA_SERVERADDR),patientToSend);
 
-                        //sendPatient.start();
+                        // sendPatient.start();
 
-                        new SendPatientAsyncTask(DisplayPatientActivity.this,intent.getStringExtra(MainActivity.EXTRA_SERVERADDR),patientToSend).execute();
-
+                        new SendPatientAsyncTask(DisplayPatientActivity.this,
+                                intent.getStringExtra(MainActivity.EXTRA_SERVERADDR), patientToSend).execute();
 
                     }
                 });
@@ -151,7 +195,7 @@ public class DisplayPatientActivity extends AppCompatActivity {
         });
     }
 
-    public void etSetEditable(EditText et, boolean isEditable){
+    public void etSetEditable(EditText et, boolean isEditable) {
         if (!isEditable)
             et.setFocusable(false);
         else
@@ -159,12 +203,12 @@ public class DisplayPatientActivity extends AppCompatActivity {
     }
 
     /* 用于代替之前的Thread以显示进度条 */
-    private class SendPatientAsyncTask extends AsyncTask<String, Integer, Boolean>{
+    private class SendPatientAsyncTask extends AsyncTask<String, Integer, Boolean> {
         private ProgressDialog dialog;
         private String serverAddress;
         private Patient patient;
 
-        public SendPatientAsyncTask(DisplayPatientActivity activity, String serverAddress, Patient patient){
+        public SendPatientAsyncTask(DisplayPatientActivity activity, String serverAddress, Patient patient) {
             this.dialog = new ProgressDialog(activity);
             this.serverAddress = serverAddress;
             this.patient = patient;
@@ -172,9 +216,9 @@ public class DisplayPatientActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            try{
+            try {
                 Socket socket = new Socket();
-                socket.connect(new InetSocketAddress(this.serverAddress,34168),2000);
+                socket.connect(new InetSocketAddress(this.serverAddress, 34168), 2000);
 
                 /* 准备发送至服务器的Patient类 */
                 ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());
@@ -185,35 +229,36 @@ public class DisplayPatientActivity extends AppCompatActivity {
                 outStream.close();
                 socket.close();
                 return true;
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 return false;
             }
 
-
         }
 
         @Override
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             this.dialog.setMessage(getString(R.string.sendingPatient));
             this.dialog.setCancelable(false);
             this.dialog.show();
         }
 
         @Override
-        protected void onPostExecute(Boolean result){
-            if(this.dialog.isShowing())
+        protected void onPostExecute(Boolean result) {
+            if (this.dialog.isShowing())
                 this.dialog.dismiss();
 
-            if(result)
-                Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.patientSent,Snackbar.LENGTH_SHORT).show();
+            if (result)
+                Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.patientSent, Snackbar.LENGTH_LONG)
+                        .show();
             else
-                Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut,Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut, Snackbar.LENGTH_LONG).show();
         }
     }
+
     /* 2019年3月5日更新 */
     /* 由于显示进度框需要AsyncTask类，该线程不予使用 */
-    class SendPatientThread extends Thread{
+    class SendPatientThread extends Thread {
         private String serverAddress;
         private Patient patient;
 
@@ -224,10 +269,10 @@ public class DisplayPatientActivity extends AppCompatActivity {
         }
 
         @Override
-        public void run(){
-            try{
+        public void run() {
+            try {
                 Socket socket = new Socket();
-                socket.connect(new InetSocketAddress(this.serverAddress,34168),2000);
+                socket.connect(new InetSocketAddress(this.serverAddress, 34168), 2000);
 
                 /* 准备发送至服务器的Patient类 */
                 ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());
@@ -237,13 +282,10 @@ public class DisplayPatientActivity extends AppCompatActivity {
 
                 outStream.close();
                 socket.close();
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-
-
-
 
 }
