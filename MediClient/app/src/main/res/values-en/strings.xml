@@ -22,4 +22,7 @@
     <string name="bloodTense">Systolic blood pressure</string>
     <string name="bloodGas">Blood Gas Analysis</string>
     <string name="pH">pH</string>
+    <string name="dialog_server_timeout">Server not found or connection timeout</string>
+    <string name="OK">OK</string>
+    <string name="dismiss">Dismiss</string>
 </resources>

@@ -22,4 +22,7 @@
     <string name="bloodTense">血压收缩压</string>
     <string name="bloodGas">血气分析</string>
     <string name="pH">pH</string>
+    <string name="dialog_server_timeout">服务器不存在或响应超时</string>
+    <string name="OK">知道了</string>
+    <string name="dismiss">取消</string>
 </resources>

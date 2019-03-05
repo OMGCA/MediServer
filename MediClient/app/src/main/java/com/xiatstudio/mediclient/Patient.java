@@ -2,8 +2,6 @@ package com.xiatstudio.mediclient;
 
 import java.io.Serializable;
 
-import android.support.v7.*;
-
 public class Patient implements Serializable {
     /* 个人信息 */
     String name; //姓名

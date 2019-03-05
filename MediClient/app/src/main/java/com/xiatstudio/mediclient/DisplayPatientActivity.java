@@ -4,20 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.method.KeyListener;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class DisplayPatientActivity extends AppCompatActivity {
 
@@ -35,7 +28,7 @@ public class DisplayPatientActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         final Patient patient = (Patient) bundle.getSerializable(MainActivity.EXTRA_PATIENT);
 
-        /* 得到新页面文本部件ID */
+        /* 得到Activity页面中EditText部件id并初始设置为不可编辑 */
         final EditText etPatientName = findViewById(R.id.patientNameText);
         etSetEditable(etPatientName,false);
 
@@ -51,6 +44,7 @@ public class DisplayPatientActivity extends AppCompatActivity {
         final EditText etPatientDoc = findViewById(R.id.patientDoc);
         etSetEditable(etPatientDoc,false);
 
+        /* 将病人信息显示其中 */
         etPatientName.setText(patient.getName());
         etPatientAge.setText(String.valueOf(patient.getAge()));
         etPatientSex.setText(patient.getSex());
@@ -86,11 +80,13 @@ public class DisplayPatientActivity extends AppCompatActivity {
         etBloodTense.setText(String.valueOf(patient.getTensePressure()));
         etBloodGas.setText(String.valueOf(patient.getBgAnalysis()));
 
+        /* 设置编辑按钮行为 */
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View view) {
+                /* 解锁文本框编辑 */
                 etSetEditable(etPatientName,true);
                 etSetEditable(etPatientAge,true);
                 etSetEditable(etPatientSex,true);
@@ -106,11 +102,14 @@ public class DisplayPatientActivity extends AppCompatActivity {
                 etSetEditable(etBloodTense,true);
                 etSetEditable(etBloodGas,true);
 
+                /* 设定发送病人信息按钮行为 */
                 FloatingActionButton fab2 = findViewById(R.id.sendPatient);
+                /* 使按钮可见 */
                 fab2.setVisibility(View.VISIBLE);
                 fab2.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View view){
+                        /* 建立新的Patient类，准备发送至服务器 */
                         Patient patientToSend = new Patient(etPatientName.getText().toString());
                         patientToSend.setAge(Integer.parseInt(etPatientAge.getText().toString()));
                         patientToSend.setSex(etPatientSex.getText().toString());
@@ -124,6 +123,7 @@ public class DisplayPatientActivity extends AppCompatActivity {
                         patientToSend.setTensePressure(Integer.parseInt(etBloodTense.getText().toString()));
                         patientToSend.setBgAnalysis(Double.parseDouble(etBloodGas.getText().toString()));
 
+                        /* 初始化并启动发送病人线程 */
                         DisplayPatientActivity threadRun = new DisplayPatientActivity();
 
                         DisplayPatientActivity.SendPatientThread sendPatient = threadRun.new SendPatientThread(intent.getStringExtra(MainActivity.EXTRA_SERVERADDR),patientToSend);

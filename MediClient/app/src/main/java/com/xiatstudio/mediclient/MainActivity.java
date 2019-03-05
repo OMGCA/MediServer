@@ -1,9 +1,7 @@
 package com.xiatstudio.mediclient;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -13,14 +11,9 @@ import java.util.concurrent.Future;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.telecom.Call;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -89,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 
     /* 此方法用来发起DisplayPatientActivity，来显示Patient信息 */
     public void displayPatient(View view, Patient p, String serverAddr) {

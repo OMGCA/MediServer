@@ -22,4 +22,7 @@
     <string name="bloodTense">収縮期血圧</string>
     <string name="bloodGas">血液ガス分析</string>
     <string name="pH">pH</string>
+    <string name="dialog_server_timeout">サーバーが見つからないか接続がタイムアウトしました</string>
+    <string name="OK">はい</string>
+    <string name="dismiss">キャンセル</string>
 </resources>
