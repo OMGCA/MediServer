@@ -29,4 +29,7 @@
     <string name="sendingPatient">正在上传病人信息...</string>
     <string name="addPatient">新增</string>
     <string name="serverOut">服务器不存在或连接超时</string>
+    <string name="nfcWritten">NFC数据读取成功</string>
+    <string name="ndefGetFail">没有获得NDEF实例</string>
+    <string name="nfcWarning">该设备不支持NFC标签读取功能</string>
 </resources>

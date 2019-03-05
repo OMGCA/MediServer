@@ -12,8 +12,8 @@
         android:id="@+id/patientNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
         android:text="@string/patientName"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,16 +23,16 @@
         android:id="@+id/patientAgeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
         android:text="@string/patientAge"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/patientSexText"
         app:layout_constraintEnd_toEndOf="@+id/patientNameLabel"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/patientNameLabel"
         app:layout_constraintTop_toTopOf="@+id/patientAgeText"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.411" />
 
     <TextView
         android:id="@+id/patientSex"
@@ -43,7 +43,6 @@
         android:text="@string/patientSex"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/patientNFC"
-        app:layout_constraintEnd_toEndOf="@+id/patientAgeLabel"
         app:layout_constraintStart_toStartOf="@+id/patientAgeLabel"
         app:layout_constraintTop_toTopOf="@+id/patientSexText" />
 
@@ -56,61 +55,60 @@
         android:text="@string/patientNFC"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/patientDoc"
-        app:layout_constraintEnd_toEndOf="@+id/patientSex"
         app:layout_constraintStart_toStartOf="@+id/patientSex"
         app:layout_constraintTop_toTopOf="@+id/patientNFC" />
 
     <EditText
         android:id="@+id/patientNameText"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:text="Name"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/patientNameLabel"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/patientNameLabel" />
+        app:layout_constraintEnd_toEndOf="@+id/patientAgeText"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/patientAgeText"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
         android:text="Age"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/patientNameText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/patientNameText"
+        app:layout_constraintEnd_toEndOf="@+id/patientSexText"
         app:layout_constraintTop_toBottomOf="@+id/patientNameText" />
 
     <EditText
         android:id="@+id/patientSexText"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Sex"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/patientAgeText"
+        app:layout_constraintEnd_toEndOf="@+id/patientNFC"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/patientAgeText"
+        app:layout_constraintStart_toStartOf="@+id/patientNFC"
         app:layout_constraintTop_toBottomOf="@+id/patientAgeText" />
 
     <EditText
         android:id="@+id/patientNFC"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="44dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="NFC"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/patientSexText"
+        app:layout_constraintEnd_toEndOf="@+id/patientDoc"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/patientSexText"
+        app:layout_constraintStart_toStartOf="@+id/patientDoc"
         app:layout_constraintTop_toBottomOf="@+id/patientSexText" />
 
     <TextView
@@ -118,10 +116,12 @@
         android:layout_width="121dp"
         android:layout_height="31dp"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="36dp"
+        android:fontFamily="sans-serif-black"
         android:text="@string/demoInfo"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="7dp" />
+        app:layout_constraintBottom_toTopOf="@+id/patientAgeText"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView6"
@@ -130,23 +130,18 @@
         android:text="@string/patientDoc"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/patientDoc"
-        app:layout_constraintEnd_toEndOf="@+id/patientNFCID2"
-        app:layout_constraintHorizontal_bias="0.348"
         app:layout_constraintStart_toStartOf="@+id/patientNFCID2"
-        app:layout_constraintTop_toTopOf="@+id/patientDoc"
-        app:layout_constraintVertical_bias="0.428" />
+        app:layout_constraintTop_toTopOf="@+id/patientDoc" />
 
     <EditText
         android:id="@+id/patientDoc"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Doc"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/patientNFC"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/patientNFC"
+        app:layout_constraintStart_toStartOf="@+id/bodyTmpText"
         app:layout_constraintTop_toBottomOf="@+id/patientNFC" />
 
     <TextView
@@ -154,51 +149,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="sans-serif-black"
         android:text="@string/pathologicalData"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView5"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintBottom_toTopOf="@+id/bodyPulse"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/bodyTempLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/bodyTmp"
-        app:layout_constraintEnd_toEndOf="@+id/textView6"
-        app:layout_constraintHorizontal_bias="0.357"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintBottom_toTopOf="@+id/bodyPulse"
+        app:layout_constraintStart_toStartOf="@+id/pathological"
+        app:layout_constraintTop_toTopOf="@+id/bodyTmpText" />
 
     <EditText
         android:id="@+id/bodyTmpText"
-        android:layout_width="82dp"
+        android:layout_width="81dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:inputType="numberDecimal"
         android:text="Body Tmp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/bodyTempLabel"
-        app:layout_constraintEnd_toEndOf="@+id/patientDoc"
+        app:layout_constraintEnd_toEndOf="@+id/bodyPulse"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/patientDoc"
-        app:layout_constraintTop_toTopOf="@+id/bodyTempLabel" />
+        app:layout_constraintStart_toStartOf="@+id/bodyPulse"
+        app:layout_constraintTop_toBottomOf="@+id/patientDoc" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="168dp"
         android:layout_marginBottom="8dp"
         android:text="℃"
         app:layout_constraintBottom_toTopOf="@+id/bodyPulse"
-        app:layout_constraintStart_toEndOf="@+id/bodyTmpText"
-        app:layout_constraintTop_toTopOf="@+id/bodyTmpText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bodyTmpText" />
 
     <TextView
         android:id="@+id/textView10"
@@ -208,36 +201,32 @@
         android:layout_marginBottom="8dp"
         android:text="@string/bodyPulse"
         app:layout_constraintBottom_toTopOf="@+id/breathFreq"
-        app:layout_constraintEnd_toEndOf="@+id/bodyTempLabel"
         app:layout_constraintStart_toStartOf="@+id/bodyTempLabel"
         app:layout_constraintTop_toTopOf="@+id/bodyPulse" />
 
     <EditText
         android:id="@+id/bodyPulse"
-        android:layout_width="82dp"
+        android:layout_width="81dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
         android:text="pulse"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/bodyTmpText"
-        app:layout_constraintStart_toStartOf="@+id/bodyTmpText"
+        app:layout_constraintEnd_toEndOf="@+id/breathFreq"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/breathFreq"
         app:layout_constraintTop_toBottomOf="@+id/bodyTmpText" />
 
     <TextView
         android:id="@+id/perMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/perMin"
         app:layout_constraintBottom_toTopOf="@+id/breathFreq"
-        app:layout_constraintEnd_toEndOf="@+id/textView9"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bodyPulse"
-        app:layout_constraintTop_toTopOf="@+id/bodyPulse"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintTop_toTopOf="@+id/bodyPulse" />
 
     <TextView
         android:id="@+id/textView12"
@@ -247,7 +236,6 @@
         android:layout_marginBottom="8dp"
         android:text="@string/breathFreq"
         app:layout_constraintBottom_toTopOf="@+id/bloodRelease"
-        app:layout_constraintEnd_toEndOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toTopOf="@+id/breathFreq" />
 
@@ -259,21 +247,20 @@
         android:inputType="number"
         android:text="Breath"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/bodyPulse"
-        app:layout_constraintStart_toStartOf="@+id/bodyPulse"
+        app:layout_constraintEnd_toEndOf="@+id/bloodRelease"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/bloodRelease"
         app:layout_constraintTop_toBottomOf="@+id/bodyPulse" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/perMin"
         app:layout_constraintBottom_toTopOf="@+id/bloodRelease"
-        app:layout_constraintEnd_toEndOf="@+id/perMin"
-        app:layout_constraintStart_toEndOf="@+id/breathFreq"
+        app:layout_constraintStart_toStartOf="@+id/perMin"
         app:layout_constraintTop_toTopOf="@+id/breathFreq" />
 
     <TextView
@@ -284,7 +271,6 @@
         android:layout_marginBottom="8dp"
         android:text="@string/bloodRelease"
         app:layout_constraintBottom_toTopOf="@+id/bloodTense"
-        app:layout_constraintEnd_toEndOf="@+id/textView12"
         app:layout_constraintStart_toStartOf="@+id/textView12"
         app:layout_constraintTop_toTopOf="@+id/bloodRelease" />
 
@@ -296,20 +282,20 @@
         android:inputType="number"
         android:text="Blood Release"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/breathFreq"
-        app:layout_constraintStart_toStartOf="@+id/breathFreq"
+        app:layout_constraintEnd_toEndOf="@+id/bloodTense"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/bloodTense"
         app:layout_constraintTop_toBottomOf="@+id/breathFreq" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/mmHg"
         app:layout_constraintBottom_toTopOf="@+id/bloodTense"
-        app:layout_constraintStart_toEndOf="@+id/bloodRelease"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
         app:layout_constraintTop_toTopOf="@+id/bloodRelease" />
 
     <TextView
@@ -320,7 +306,6 @@
         android:layout_marginBottom="8dp"
         android:text="@string/bloodTense"
         app:layout_constraintBottom_toTopOf="@+id/bGas"
-        app:layout_constraintEnd_toEndOf="@+id/textView14"
         app:layout_constraintStart_toStartOf="@+id/textView14"
         app:layout_constraintTop_toTopOf="@+id/bloodTense" />
 
@@ -328,26 +313,24 @@
         android:id="@+id/bloodTense"
         android:layout_width="81dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="number"
         android:text="Blood Tense"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/bloodRelease"
+        app:layout_constraintEnd_toEndOf="@+id/bGas"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/bloodRelease"
+        app:layout_constraintStart_toStartOf="@+id/bGas"
         app:layout_constraintTop_toBottomOf="@+id/bloodRelease" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/mmHg"
         app:layout_constraintBottom_toTopOf="@+id/bGas"
-        app:layout_constraintStart_toEndOf="@+id/bloodTense"
+        app:layout_constraintStart_toStartOf="@+id/textView15"
         app:layout_constraintTop_toTopOf="@+id/bloodTense" />
 
     <TextView
@@ -356,7 +339,6 @@
         android:layout_height="wrap_content"
         android:text="@string/bloodGas"
         app:layout_constraintBottom_toBottomOf="@+id/bGas"
-        app:layout_constraintEnd_toEndOf="@+id/textView16"
         app:layout_constraintStart_toStartOf="@+id/textView16"
         app:layout_constraintTop_toTopOf="@+id/bGas" />
 
@@ -364,21 +346,23 @@
         android:id="@+id/bGas"
         android:layout_width="81dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="numberDecimal"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/bloodTense"
-        app:layout_constraintStart_toStartOf="@+id/bloodTense"
-        app:layout_constraintTop_toBottomOf="@+id/bloodTense" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/bloodTense"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:text="@string/pH"
         app:layout_constraintBottom_toBottomOf="@+id/bGas"
-        app:layout_constraintStart_toEndOf="@+id/bGas"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
         app:layout_constraintTop_toTopOf="@+id/bGas" />
 
 </android.support.constraint.ConstraintLayout>

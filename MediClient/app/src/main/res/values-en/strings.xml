@@ -29,4 +29,7 @@
     <string name="sendingPatient">Sending patient info...</string>
     <string name="addPatient">Add</string>
     <string name="serverOut">Server not found or connection timeout.</string>
+    <string name="nfcWritten">NFC data has been read successfully.</string>
+    <string name="ndefGetFail">No NDEF instance was found.</string>
+    <string name="nfcWarning">This device doesn\'t support NFC.</string>
 </resources>

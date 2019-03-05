@@ -210,7 +210,7 @@ public class DisplayPatientActivity extends AppCompatActivity {
             else
                 Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut,Snackbar.LENGTH_SHORT).show();
         }
-
+    }
     /* 2019年3月5日更新 */
     /* 由于显示进度框需要AsyncTask类，该线程不予使用 */
     class SendPatientThread extends Thread{
@@ -244,6 +244,6 @@ public class DisplayPatientActivity extends AppCompatActivity {
     }
 
 
-    }
+
 
 }

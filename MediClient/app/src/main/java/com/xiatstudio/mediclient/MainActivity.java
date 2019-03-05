@@ -4,6 +4,7 @@ import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -11,7 +12,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import android.content.Intent;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.Ndef;
+import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -21,11 +30,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseNfcActivity {
     public static final String EXTRA_PATIENT = "com.xiatstudio.mediclient.PATIENT";
     public static final String EXTRA_SERVERADDR = "com.xiatstudio.mediclient.SERVERADDR";
     public static Patient retrievedPatient = new Patient("NULL");
+    private EditText patientID;
+
+    private String mTagText;
+    /* 从UI中得到文本区部件 */
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
         Button addButton = findViewById(R.id.addButton);
 
-
-
-        /* 从UI中得到文本区部件 */
-        final EditText patientID = findViewById(R.id.patientIDText);
+        patientID = findViewById(R.id.patientIDText);
         final EditText serverAdd = findViewById(R.id.serverAddress);
+
+        if(!isNFCSupported()){
+            Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.nfcWarning,
+                    Snackbar.LENGTH_SHORT)
+                    .show();
+        }
 
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -92,9 +111,6 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
-
-
             }
         });
 
@@ -136,6 +152,85 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public boolean isNFCSupported(){
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        if(nfcAdapter != null)
+            return true;
+        else
+            return false;
+    }
+    @Override
+    public void onNewIntent(Intent intent){
+        Tag detectedTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+
+        Ndef ndef = Ndef.get(detectedTag);
+
+        if(ndef != null){
+            mTagText = ndef.getType() + "\nmaxsize:" +ndef.getMaxSize() + "bytes\n\n";
+            readNfcTag(intent);
+            patientID.setText(mTagText);
+        }else{
+            Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.ndefGetFail,
+                    Snackbar.LENGTH_SHORT)
+                    .show();
+        }
+    }
+
+    private void readNfcTag(Intent intent){
+        if(NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())){
+            Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+
+            NdefMessage msgs[] = null;
+
+            int contentSize = 0;
+            if(rawMsgs != null){
+                msgs = new NdefMessage[rawMsgs.length];
+                for(int i = 0; i < rawMsgs.length; i++){
+                    msgs[i] = (NdefMessage) rawMsgs[i];
+                    contentSize += msgs[i].toByteArray().length;
+                }
+            }
+
+            try{
+                if(msgs != null){
+                    NdefRecord record = msgs[0].getRecords()[0];
+                    String textRecord = parseTextRecord(record);
+                    mTagText += textRecord + "\n\ntext\n" + contentSize + " bytes";
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static String parseTextRecord(NdefRecord ndefRecord){
+        if(ndefRecord.getTnf() != NdefRecord.TNF_WELL_KNOWN){
+            return null;
+        }
+
+        if(!Arrays.equals(ndefRecord.getType(), NdefRecord.RTD_TEXT)){
+            return null;
+        }
+
+        try{
+            byte[] payload = ndefRecord.getPayload();
+
+            String textEncoding = ((payload[0] & 0x80) == 0) ? "UTF-8" : "UTF-16";
+
+            int langCodeLength = payload[0] & 0x3f;
+
+            String langCode = new String(payload,1,langCodeLength,"US-ASCII");
+
+            String textRecord = new String(payload, langCodeLength + 1, payload.length - langCodeLength - 1, textEncoding);
+
+            return textRecord;
+        } catch (Exception e){
+            throw new IllegalArgumentException();
+        }
+    }
+
+
 
     /* 2019年3月3日凌晨更新：此方法用来代替先前使用的Thread */
     /* 同样为线程，Callable可定义返回值 */
@@ -214,5 +309,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
 }

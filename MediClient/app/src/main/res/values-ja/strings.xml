@@ -29,4 +29,7 @@
     <string name="sendingPatient">患者情報をアップロードする...</string>
     <string name="addPatient">追加する</string>
     <string name="serverOut">サーバーが見つからないか、接続がタイムアウトしました。</string>
+    <string name="nfcWritten">NFC数据读取成功</string>
+    <string name="ndefGetFail">没有获得NDEF实例</string>
+    <string name="nfcWarning">このデバイスはNFCをサポートしていません</string>
 </resources>
