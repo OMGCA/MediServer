@@ -33,24 +33,32 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
 
         /* 从UI中得到文本区部件 */
         final EditText patientID = findViewById(R.id.patientIDText);
         final EditText serverAdd = findViewById(R.id.serverAddress);
+
+
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Patient emptyPatient = new Patient(" ");
+                emptyPatient.setSlotID(patientID.getText().toString());
+
+                displayPatient(view, emptyPatient, serverAdd.getText().toString());
+            }
+        });
 
         /* 查询按钮 */
         Button queryButton = findViewById(R.id.queryButton);
         queryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String queryID = patientID.getText().toString(); /* 得到文本区输入的病人ID */
                 final String serverAddress = serverAdd.getText().toString(); /* 得到文本区输入的服务器地址 */
+                final String queryID = patientID.getText().toString(); /* 得到文本区输入的病人ID */
 
                 MainActivity threadRun = new MainActivity();
 

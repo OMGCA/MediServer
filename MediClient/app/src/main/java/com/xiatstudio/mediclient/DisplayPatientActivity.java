@@ -1,9 +1,12 @@
 package com.xiatstudio.mediclient;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -124,11 +127,13 @@ public class DisplayPatientActivity extends AppCompatActivity {
                         patientToSend.setBgAnalysis(Double.parseDouble(etBloodGas.getText().toString()));
 
                         /* 初始化并启动发送病人线程 */
-                        DisplayPatientActivity threadRun = new DisplayPatientActivity();
+                        //DisplayPatientActivity threadRun = new DisplayPatientActivity();
 
-                        DisplayPatientActivity.SendPatientThread sendPatient = threadRun.new SendPatientThread(intent.getStringExtra(MainActivity.EXTRA_SERVERADDR),patientToSend);
+                        //DisplayPatientActivity.SendPatientThread sendPatient = threadRun.new SendPatientThread(intent.getStringExtra(MainActivity.EXTRA_SERVERADDR),patientToSend);
 
-                        sendPatient.start();
+                        //sendPatient.start();
+
+                        new SendPatientAsyncTask(DisplayPatientActivity.this,intent.getStringExtra(MainActivity.EXTRA_SERVERADDR),patientToSend).execute();
 
 
                     }
@@ -144,6 +149,57 @@ public class DisplayPatientActivity extends AppCompatActivity {
             et.setFocusableInTouchMode(true);
     }
 
+    /* 用于代替之前的Thread以显示进度条 */
+    private class SendPatientAsyncTask extends AsyncTask<String, Integer, Boolean>{
+        private ProgressDialog dialog;
+        private String serverAddress;
+        private Patient patient;
+
+        public SendPatientAsyncTask(DisplayPatientActivity activity, String serverAddress, Patient patient){
+            this.dialog = new ProgressDialog(activity);
+            this.serverAddress = serverAddress;
+            this.patient = patient;
+        }
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            try{
+                Socket socket = new Socket(this.serverAddress, 34168);
+
+                /* 准备发送至服务器的Patient类 */
+                ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());
+                /* 将参数中的Patient写入ObjectOutputStream，并发送至服务器 */
+                outStream.writeObject(this.patient);
+                socket.shutdownOutput();
+
+                outStream.close();
+                socket.close();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            return true;
+        }
+
+        @Override
+        protected void onPreExecute(){
+            this.dialog.setMessage("Sending patient info");
+            this.dialog.setCancelable(false);
+            this.dialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result){
+            if(this.dialog.isShowing())
+                this.dialog.dismiss();
+
+            Snackbar.make(findViewById(R.id.myCoordinatorLayout), "病人信息已发送",
+                    Snackbar.LENGTH_SHORT)
+                    .show();
+        }
+
+    /* 2019年3月5日更新 */
+    /* 由于显示进度框需要AsyncTask类，该线程不予使用 */
     class SendPatientThread extends Thread{
         private String serverAddress;
         private Patient patient;
@@ -171,6 +227,9 @@ public class DisplayPatientActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+
     }
 
 }
