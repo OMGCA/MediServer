@@ -16,8 +16,17 @@ import android.widget.EditText;
 import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DisplayPatientActivity extends AppCompatActivity {
+    private List<EditText> demograEtGrp = new ArrayList<EditText>();
+    private List<EditText> pathologyEtGrp=  new ArrayList<EditText>();
+    private List<EditText> noteEtGrp = new ArrayList<EditText>();
+
+    private int[] demograEditText = new int[5];
+    private int[] pathologyEditText = new int[8];
+    private int[] noteEditText = new int[5];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +36,10 @@ public class DisplayPatientActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        defineEditTextComponents();
+
+        registerEditText();
 
         /* 新建Intent */
         final Intent intent = getIntent();
@@ -117,7 +130,6 @@ public class DisplayPatientActivity extends AppCompatActivity {
         etECG.setText(patient.getECG());
         etDocNote.setText(patient.getDocNote());
 
-
         /* 设置编辑按钮行为 */
         FloatingActionButton fab = findViewById(R.id.fab);
         Animation anim = android.view.animation.AnimationUtils.loadAnimation(fab.getContext(), R.anim.shake);
@@ -129,28 +141,7 @@ public class DisplayPatientActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 /* 解锁文本框编辑 */
-                etSetEditable(etPatientName, true);
-                etSetEditable(etPatientAge, true);
-                etSetEditable(etPatientSex, true);
-                etSetEditable(etPatientNFC, true);
-                etSetEditable(etPatientDoc, true);
-
-                etSetEditable(etBodyTmp, true);
-                etSetEditable(etBodyPulse, true);
-                etSetEditable(etBreathFreq, true);
-                etSetEditable(etBodyPulse, true);
-                etSetEditable(etBreathFreq, true);
-                etSetEditable(etBloodRelease, true);
-                etSetEditable(etBloodTense, true);
-                etSetEditable(etBloodGas, true);
-                etSetEditable(etBloodNa, true);
-                etSetEditable(etBloodK, true);
-
-                etSetEditable(etOpPending, true);
-                etSetEditable(etPathoReport, true);
-                etSetEditable(etImaging, true);
-                etSetEditable(etECG, true);
-                etSetEditable(etDocNote, true);
+                isLockEdit(false);
 
                 /* 设定发送病人信息按钮行为 */
                 FloatingActionButton fab2 = findViewById(R.id.sendPatient);
@@ -178,14 +169,6 @@ public class DisplayPatientActivity extends AppCompatActivity {
                         patientToSend.setBloodNa(Integer.parseInt(etBloodNa.getText().toString()));
                         patientToSend.setBloodK(Double.parseDouble(etBloodK.getText().toString()));
 
-                        /* 初始化并启动发送病人线程 */
-                        // DisplayPatientActivity threadRun = new DisplayPatientActivity();
-
-                        // DisplayPatientActivity.SendPatientThread sendPatient = threadRun.new
-                        // SendPatientThread(intent.getStringExtra(MainActivity.EXTRA_SERVERADDR),patientToSend);
-
-                        // sendPatient.start();
-
                         new SendPatientAsyncTask(DisplayPatientActivity.this,
                                 intent.getStringExtra(MainActivity.EXTRA_SERVERADDR), patientToSend).execute();
 
@@ -195,6 +178,60 @@ public class DisplayPatientActivity extends AppCompatActivity {
         });
     }
 
+    public void defineEditTextComponents(){
+        demograEditText[0] = R.id.patientNameText;
+        demograEditText[1] = R.id.patientAgeText;
+        demograEditText[2] = R.id.patientSexText;
+        demograEditText[3] = R.id.patientIDText;
+        demograEditText[4] = R.id.patientDoc;
+
+        pathologyEditText[0] = R.id.bodyTmpText;
+        pathologyEditText[1] = R.id.bodyPulse;
+        pathologyEditText[2] = R.id.breathFreq;
+        pathologyEditText[3] = R.id.bloodRelease;
+        pathologyEditText[4] = R.id.bloodTense;
+        pathologyEditText[5] = R.id.bGas;
+        pathologyEditText[6] = R.id.bloodNa;
+        pathologyEditText[7] = R.id.bloodK;
+
+        noteEditText[0] = R.id.opPending;
+        noteEditText[1] = R.id.pathoReport;
+        noteEditText[2] = R.id.imaging;
+        noteEditText[3] = R.id.ECG;
+        noteEditText[4] = R.id.docNote;
+    }
+
+    public void registerEditText(){
+
+        for(int i = 0; i < demograEditText.length; i++){
+            demograEtGrp.add((EditText) findViewById(demograEditText[i]));
+        }
+
+        for(int i = 0; i < pathologyEditText.length; i++){
+            pathologyEtGrp.add((EditText) findViewById(pathologyEditText[i]));
+        }
+
+        for(int i = 0; i < noteEditText.length; i++){
+            noteEtGrp.add((EditText) findViewById(noteEditText[i]));
+        }
+
+    }
+
+    public void isLockEdit(boolean isLock){
+
+        for(int i = 0; i < demograEtGrp.size(); i++){
+            etSetEditable(demograEtGrp.get(i),!isLock);
+        }
+
+        for(int i = 0; i < pathologyEtGrp.size(); i++){
+            etSetEditable(pathologyEtGrp.get(i),!isLock);
+        }
+
+        for(int i = 0; i < noteEtGrp.size(); i++){
+            etSetEditable(noteEtGrp.get(i),!isLock);
+        }
+
+    }
     public void etSetEditable(EditText et, boolean isEditable) {
         if (!isEditable)
             et.setFocusable(false);
@@ -256,8 +293,8 @@ public class DisplayPatientActivity extends AppCompatActivity {
         }
     }
 
-    /* 2019年3月5日更新 */
     /* 由于显示进度框需要AsyncTask类，该线程不予使用 */
+    @Deprecated
     class SendPatientThread extends Thread {
         private String serverAddress;
         private Patient patient;
