@@ -1,0 +1,30 @@
+{
+    "patients": [
+        {
+            "demographic":{
+                "name":"XT",
+                "age": 18,
+                "gender": "Male",
+                "nfcid": "01",
+                "maindoc": "senna"
+            },
+            "pathology":{
+                "bodytemp":37.2,
+                "pulse": 80,
+                "breath": 14,
+                "release": 120,
+                "tense": 80,
+                "bg": 5.3,
+                "bloodNa": 3.2,
+                "bloodK": 3.2
+            },
+            "notes":{
+                "oppending":"N/A",
+                "pathologyresult":"N/A",
+                "imaging": "N/A",
+                "ecg": "N/A",
+                "docnote": "N/A"
+            }
+        }
+    ]
+}
