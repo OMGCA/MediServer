@@ -30,8 +30,8 @@ public class DisplayPatientActivity extends AppCompatActivity {
     private List<EditText> pathologyEtGrp=  new ArrayList<EditText>();
     private List<EditText> noteEtGrp = new ArrayList<EditText>();
 
-    /* 定义常量，个人信息5个，病理数据8个，备注5个 */
-    protected int demograSize = 5;
+    /* 定义常量，个人信息7个，病理数据8个，备注5个 */
+    protected int demograSize = 7;
     protected int patholoSize = 8;
     protected int noteSize = 5;
 
@@ -140,6 +140,8 @@ public class DisplayPatientActivity extends AppCompatActivity {
         demograEditText[2] = R.id.patientSexText;
         demograEditText[3] = R.id.patientNFC;
         demograEditText[4] = R.id.patientDoc;
+        demograEditText[5] = R.id.patientLevel;
+        demograEditText[6] = R.id.patientTaboo;
 
         /* 病理数据 */
         pathologyEditText[0] = R.id.bodyTmpText;
@@ -194,6 +196,8 @@ public class DisplayPatientActivity extends AppCompatActivity {
         pDemogra[2] = p.getSex();
         pDemogra[3] = p.getSlotID();
         pDemogra[4] = p.getDoc();
+        pDemogra[5] = p.getLevel();
+        pDemogra[6] = p.getTaboo();
 
         pPathology[0] = String.valueOf(p.getBodyTemp());
         pPathology[1] = String.valueOf(p.getPulse());
@@ -218,6 +222,8 @@ public class DisplayPatientActivity extends AppCompatActivity {
         patientToSend.setSex(demograEtGrp.get(2).getText().toString());
         patientToSend.setSlotID(demograEtGrp.get(3).getText().toString());
         patientToSend.setDoc(demograEtGrp.get(4).getText().toString());
+        patientToSend.setLevel(demograEtGrp.get(5).getText().toString());
+        patientToSend.setTaboo(demograEtGrp.get(6).getText().toString());
 
         patientToSend.setBodyTemp(Double.parseDouble(pathologyEtGrp.get(0).getText().toString()));
         patientToSend.setPulse(Integer.parseInt(pathologyEtGrp.get(1).getText().toString()));

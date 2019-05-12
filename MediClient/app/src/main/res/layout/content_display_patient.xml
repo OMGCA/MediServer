@@ -43,6 +43,7 @@
                 android:inputType="number"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/bloodK"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/bloodK"
                 app:layout_constraintTop_toBottomOf="@+id/bGas" />
 
@@ -97,7 +98,9 @@
                 android:inputType="textPersonName"
                 android:text="Doc"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/bodyTmpText"
+                app:layout_constraintEnd_toEndOf="@+id/patientLevel"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/patientLevel"
                 app:layout_constraintTop_toBottomOf="@+id/patientNFC" />
 
             <TextView
@@ -111,7 +114,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/bodyPulse"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/bodyTmpText"
-                app:layout_constraintVertical_bias="0.4" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -120,19 +123,20 @@
                 android:text="@string/mmolPerL"
                 app:layout_constraintBottom_toBottomOf="@+id/bloodK"
                 app:layout_constraintStart_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toTopOf="@+id/bloodK" />
+                app:layout_constraintTop_toTopOf="@+id/bloodK"
+                app:layout_constraintVertical_bias="0.0" />
 
             <EditText
                 android:id="@+id/bodyTmpText"
                 android:layout_width="81dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="128dp"
                 android:ems="10"
                 android:inputType="numberDecimal"
                 android:text="Body Tmp"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/bodyPulse"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/bodyPulse"
                 app:layout_constraintTop_toBottomOf="@+id/patientDoc" />
 
@@ -145,7 +149,8 @@
                 android:text="@string/mmHg"
                 app:layout_constraintBottom_toTopOf="@+id/bGas"
                 app:layout_constraintStart_toStartOf="@+id/textView15"
-                app:layout_constraintTop_toTopOf="@+id/bloodTense" />
+                app:layout_constraintTop_toTopOf="@+id/bloodTense"
+                app:layout_constraintVertical_bias="0.8" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -156,7 +161,8 @@
                 android:text="@string/mmHg"
                 app:layout_constraintBottom_toTopOf="@+id/bloodTense"
                 app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toTopOf="@+id/bloodRelease" />
+                app:layout_constraintTop_toTopOf="@+id/bloodRelease"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView19"
@@ -165,7 +171,8 @@
                 android:text="@string/pH"
                 app:layout_constraintBottom_toBottomOf="@+id/bGas"
                 app:layout_constraintStart_toStartOf="@+id/textView17"
-                app:layout_constraintTop_toTopOf="@+id/bGas" />
+                app:layout_constraintTop_toTopOf="@+id/bGas"
+                app:layout_constraintVertical_bias="0.428" />
 
             <TextView
                 android:id="@+id/textView18"
@@ -210,12 +217,14 @@
                 android:text="@string/breathFreq"
                 app:layout_constraintBottom_toTopOf="@+id/bloodRelease"
                 app:layout_constraintStart_toStartOf="@+id/textView10"
-                app:layout_constraintTop_toTopOf="@+id/breathFreq" />
+                app:layout_constraintTop_toTopOf="@+id/breathFreq"
+                app:layout_constraintVertical_bias="0.333" />
 
             <EditText
                 android:id="@+id/bloodRelease"
                 android:layout_width="81dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:ems="10"
                 android:inputType="number"
                 android:text="Blood Release"
@@ -259,7 +268,8 @@
                 android:text="@string/bodyTmp"
                 app:layout_constraintBottom_toTopOf="@+id/bodyPulse"
                 app:layout_constraintStart_toStartOf="@+id/pathological"
-                app:layout_constraintTop_toTopOf="@+id/bodyTmpText" />
+                app:layout_constraintTop_toTopOf="@+id/bodyTmpText"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -268,16 +278,17 @@
                 android:text="@string/bloodNa"
                 app:layout_constraintBottom_toBottomOf="@+id/bloodNa"
                 app:layout_constraintStart_toStartOf="@+id/textView18"
-                app:layout_constraintTop_toTopOf="@+id/bloodNa" />
+                app:layout_constraintTop_toBottomOf="@+id/bGas" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="@string/bloodK"
                 app:layout_constraintBottom_toBottomOf="@+id/bloodK"
                 app:layout_constraintStart_toStartOf="@+id/textView3"
-                app:layout_constraintTop_toTopOf="@+id/bloodK" />
+                app:layout_constraintTop_toBottomOf="@+id/bloodNa" />
 
             <TextView
                 android:id="@+id/patientNameLabel"
@@ -337,7 +348,8 @@
                 android:text="@string/bodyPulse"
                 app:layout_constraintBottom_toTopOf="@+id/breathFreq"
                 app:layout_constraintStart_toStartOf="@+id/bodyTempLabel"
-                app:layout_constraintTop_toTopOf="@+id/bodyPulse" />
+                app:layout_constraintTop_toTopOf="@+id/bodyPulse"
+                app:layout_constraintVertical_bias="0.192" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -348,7 +360,8 @@
                 android:text="@string/bloodRelease"
                 app:layout_constraintBottom_toTopOf="@+id/bloodTense"
                 app:layout_constraintStart_toStartOf="@+id/textView12"
-                app:layout_constraintTop_toTopOf="@+id/bloodRelease" />
+                app:layout_constraintTop_toTopOf="@+id/bloodRelease"
+                app:layout_constraintVertical_bias="0.0" />
 
             <EditText
                 android:id="@+id/bGas"
@@ -358,6 +371,7 @@
                 android:inputType="numberDecimal"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/bloodNa"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/bloodNa"
                 app:layout_constraintTop_toBottomOf="@+id/bloodTense" />
 
@@ -368,7 +382,8 @@
                 android:text="@string/mmolPerL"
                 app:layout_constraintBottom_toBottomOf="@+id/bloodNa"
                 app:layout_constraintStart_toStartOf="@+id/textView19"
-                app:layout_constraintTop_toTopOf="@+id/bloodNa" />
+                app:layout_constraintTop_toTopOf="@+id/bloodNa"
+                app:layout_constraintVertical_bias="0.809" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -389,7 +404,8 @@
                 android:text="@string/bloodTense"
                 app:layout_constraintBottom_toTopOf="@+id/bGas"
                 app:layout_constraintStart_toStartOf="@+id/textView14"
-                app:layout_constraintTop_toTopOf="@+id/bloodTense" />
+                app:layout_constraintTop_toTopOf="@+id/bloodTense"
+                app:layout_constraintVertical_bias="0.8" />
 
             <EditText
                 android:id="@+id/bodyPulse"
@@ -413,7 +429,8 @@
                 android:text="@string/perMin"
                 app:layout_constraintBottom_toTopOf="@+id/breathFreq"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
-                app:layout_constraintTop_toTopOf="@+id/bodyPulse" />
+                app:layout_constraintTop_toTopOf="@+id/bodyPulse"
+                app:layout_constraintVertical_bias="0.192" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -424,14 +441,15 @@
                 android:text="@string/perMin"
                 app:layout_constraintBottom_toTopOf="@+id/bloodRelease"
                 app:layout_constraintStart_toStartOf="@+id/perMin"
-                app:layout_constraintTop_toTopOf="@+id/breathFreq" />
+                app:layout_constraintTop_toTopOf="@+id/breathFreq"
+                app:layout_constraintVertical_bias="0.333" />
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/notes"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -445,7 +463,8 @@
                 android:text="@string/opPending"
                 app:layout_constraintBottom_toBottomOf="@+id/opPending"
                 app:layout_constraintStart_toStartOf="@+id/textView11"
-                app:layout_constraintTop_toTopOf="@+id/opPending" />
+                app:layout_constraintTop_toTopOf="@+id/opPending"
+                app:layout_constraintVertical_bias="1.0" />
 
             <EditText
                 android:id="@+id/opPending"
@@ -466,7 +485,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/pathoReport"
-                app:layout_constraintBottom_toBottomOf="@+id/pathoReport"
+                app:layout_constraintBottom_toTopOf="@+id/imaging"
                 app:layout_constraintStart_toStartOf="@+id/textView20"
                 app:layout_constraintTop_toTopOf="@+id/pathoReport" />
 
@@ -479,6 +498,7 @@
                 android:text="Name"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/imaging"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/imaging"
                 app:layout_constraintTop_toBottomOf="@+id/opPending" />
 
@@ -500,6 +520,7 @@
                 android:text="Name"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/ECG"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/ECG"
                 app:layout_constraintTop_toBottomOf="@+id/pathoReport" />
 
@@ -510,7 +531,8 @@
                 android:text="@string/ECG"
                 app:layout_constraintBottom_toBottomOf="@+id/ECG"
                 app:layout_constraintStart_toStartOf="@+id/textView22"
-                app:layout_constraintTop_toTopOf="@+id/ECG" />
+                app:layout_constraintTop_toTopOf="@+id/ECG"
+                app:layout_constraintVertical_bias="0.523" />
 
             <EditText
                 android:id="@+id/ECG"
@@ -521,6 +543,7 @@
                 android:text="Name"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/docNote"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/docNote"
                 app:layout_constraintTop_toBottomOf="@+id/imaging" />
 
@@ -543,6 +566,50 @@
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/bloodK"
                 app:layout_constraintTop_toBottomOf="@+id/ECG" />
+
+            <EditText
+                android:id="@+id/patientLevel"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Level"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/patientTaboo"
+                app:layout_constraintStart_toStartOf="@+id/patientTaboo"
+                app:layout_constraintTop_toBottomOf="@+id/patientDoc" />
+
+            <EditText
+                android:id="@+id/patientTaboo"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Taboo"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/bodyTmpText"
+                app:layout_constraintTop_toBottomOf="@+id/patientLevel" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/patientLevel"
+                app:layout_constraintBottom_toTopOf="@+id/patientTaboo"
+                app:layout_constraintStart_toStartOf="@+id/textView6"
+                app:layout_constraintTop_toTopOf="@+id/patientLevel"
+                app:layout_constraintVertical_bias="0.6" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/patientTaboo"
+                app:layout_constraintBottom_toBottomOf="@+id/patientTaboo"
+                app:layout_constraintStart_toStartOf="@+id/textView25"
+                app:layout_constraintTop_toTopOf="@+id/patientTaboo"
+                app:layout_constraintVertical_bias="0.571" />
 
 
         </android.support.constraint.ConstraintLayout>

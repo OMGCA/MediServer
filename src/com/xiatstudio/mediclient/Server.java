@@ -272,6 +272,8 @@ public class Server {
 			writer.write(p.getSex() + ",");
 			writer.write(p.getSlotID() + ",");
 			writer.write(p.getDoc() + ",");
+			writer.write(p.getLevel()+",");
+			writer.write(p.getTaboo()+",");
 			writer.write(p.getBodyTemp() + ",");
 			writer.write(p.getPulse() + ",");
 			writer.write(p.getBreath() + ",");
@@ -304,19 +306,21 @@ public class Server {
 		p.setSex(infoStream[2]);
 		p.setSlotID(infoStream[3]);
 		p.setDoc(infoStream[4]);
-		p.setBodyTemp(Double.parseDouble(infoStream[5]));
-		p.setPulse(Integer.parseInt(infoStream[6]));
-		p.setBreath(Integer.parseInt(infoStream[7]));
-		p.setReleasePressure(Integer.parseInt(infoStream[8]));
-		p.setTensePressure(Integer.parseInt(infoStream[9]));
-		p.setBgAnalysis(Double.parseDouble(infoStream[10]));
-		p.setBloodNa(Integer.parseInt(infoStream[11]));
-		p.setBloodK(Double.parseDouble(infoStream[12]));
-		p.setOpPending(infoStream[13]);
-		p.setPathologyResult(infoStream[14]);
-		p.setImaging(infoStream[15]);
-		p.setECG(infoStream[16]);
-		p.setDocNote(infoStream[17]);
+		p.setLevel(infoStream[5]);
+		p.setTaboo(infoStream[6]);
+		p.setBodyTemp(Double.parseDouble(infoStream[7]));
+		p.setPulse(Integer.parseInt(infoStream[8]));
+		p.setBreath(Integer.parseInt(infoStream[9]));
+		p.setReleasePressure(Integer.parseInt(infoStream[10]));
+		p.setTensePressure(Integer.parseInt(infoStream[11]));
+		p.setBgAnalysis(Double.parseDouble(infoStream[12]));
+		p.setBloodNa(Integer.parseInt(infoStream[13]));
+		p.setBloodK(Double.parseDouble(infoStream[14]));
+		p.setOpPending(infoStream[15]);
+		p.setPathologyResult(infoStream[16]);
+		p.setImaging(infoStream[17]);
+		p.setECG(infoStream[18]);
+		p.setDocNote(infoStream[19]);
 		/* 添加至patientList中 */
 		patientList.add(p);
 	}

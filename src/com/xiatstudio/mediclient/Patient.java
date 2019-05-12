@@ -9,6 +9,8 @@ public class Patient implements Serializable {
  	String sex; //性别
 	String slotID; //床位（或NFC标签标识）
 	String doctor;//主治医师
+	String careLevel;
+	String careTaboo;
 	
 	/* 数据信息 */
 	double bodyTemp; //体温，℃
@@ -35,6 +37,8 @@ public class Patient implements Serializable {
 		this.sex = "";
 		this.slotID = "";
 		this.doctor = "";
+		this.careLevel = "";
+		this.careTaboo = "";
 		
 		this.bodyTemp = 0;
 		this.pulse = 0;
@@ -94,6 +98,22 @@ public class Patient implements Serializable {
 	
 	public String getDoc() {
 		return this.doctor;
+	}
+	
+	public void setLevel(String level) {
+		this.careLevel = level;
+	}
+	
+	public String getLevel() {
+		return this.careLevel;
+	}
+	
+	public void setTaboo(String taboo) {
+		this.careTaboo = taboo;
+	}
+	
+	public String getTaboo() {
+		return this.careTaboo;
 	}
 
 	public void setBodyTemp(double temp){

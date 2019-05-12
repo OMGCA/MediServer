@@ -43,4 +43,6 @@
     <string name="opPending">Operation Pending</string>
     <string name="imaging">Imaging Report</string>
     <string name="serverNullTitle">Server Error</string>
+    <string name="patientLevel">Nursing Level</string>
+    <string name="patientTaboo">Nursing Taboo</string>
 </resources>

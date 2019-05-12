@@ -43,4 +43,6 @@
     <string name="opPending">手術の種類</string>
     <string name="imaging">イメージング結果</string>
     <string name="serverNullTitle">サーバーエラー</string>
+    <string name="patientLevel">看護レベル</string>
+    <string name="patientTaboo">看護タブー</string>
 </resources>
