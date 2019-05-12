@@ -11,6 +11,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.nfc.NdefMessage;
@@ -61,6 +64,8 @@ public class MainActivity extends BaseNfcActivity {
     EditText serverAdd;
     View contextView;
 
+    private AlertDialog serverNull;
+
     /*
      * Override onCreate方法 该方法在MainActivity启用时调用 作为程序的主入口
      */
@@ -77,6 +82,7 @@ public class MainActivity extends BaseNfcActivity {
         queryButton = findViewById(R.id.queryButton);
         serverAdd = findViewById(R.id.serverAddress);
         contextView = findViewById(R.id.myCoordinatorLayout);
+        serverNull = new AlertDialog.Builder(MainActivity.this).create();
 
         /* 设定UI中的"添加病人"按钮部件事件 */
         setAddPatientAction();
@@ -132,7 +138,16 @@ public class MainActivity extends BaseNfcActivity {
         /* 服务器连接失败时或连接时间过长时弹出提示消息 */
         catch (ExecutionException e) {
             p = new Patient("NULL");
-            Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut, Snackbar.LENGTH_SHORT).show();
+            //Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut, Snackbar.LENGTH_SHORT).show();
+            serverNull.setTitle(getString(R.string.serverNullTitle));
+            serverNull.setMessage(getString(R.string.serverOut));
+            serverNull.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            serverNull.show();
             e.printStackTrace();
         } catch (InterruptedException e) {
             p = new Patient("NULL");

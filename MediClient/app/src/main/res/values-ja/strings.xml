@@ -42,4 +42,5 @@
     <string name="docNote">医療命令</string>
     <string name="opPending">手術の種類</string>
     <string name="imaging">イメージング結果</string>
+    <string name="serverNullTitle">サーバーエラー</string>
 </resources>

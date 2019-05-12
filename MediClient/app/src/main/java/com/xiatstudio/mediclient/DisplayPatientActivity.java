@@ -2,11 +2,13 @@ package com.xiatstudio.mediclient;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -314,12 +316,24 @@ public class DisplayPatientActivity extends AppCompatActivity {
             if (this.dialog.isShowing())
                 this.dialog.dismiss();
 
+            AlertDialog patientSent;
+            patientSent = new AlertDialog.Builder(DisplayPatientActivity.this).create();
+            patientSent.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
             /* 显示提示消息 */
             if (result)
-                Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.patientSent, Snackbar.LENGTH_LONG)
-                        .show();
+                patientSent.setMessage(getString(R.string.patientSent));
+                //Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.patientSent, Snackbar.LENGTH_LONG)
+                        //.show();
             else
-                Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut, Snackbar.LENGTH_LONG).show();
+                patientSent.setMessage(getString(R.string.serverOut));
+
+            patientSent.show();
         }
     }
 

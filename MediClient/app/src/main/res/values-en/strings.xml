@@ -42,4 +42,5 @@
     <string name="docNote">Doctor\'s Note</string>
     <string name="opPending">Operation Pending</string>
     <string name="imaging">Imaging Report</string>
+    <string name="serverNullTitle">Server Error</string>
 </resources>

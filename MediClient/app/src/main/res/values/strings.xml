@@ -42,4 +42,5 @@
     <string name="imaging">影像学结果</string>
     <string name="ECG">心电图备注</string>
     <string name="docNote">医嘱</string>
+    <string name="serverNullTitle">服务器错误</string>
 </resources>
