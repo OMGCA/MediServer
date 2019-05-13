@@ -84,6 +84,13 @@ public class MainActivity extends BaseNfcActivity {
         contextView = findViewById(R.id.myCoordinatorLayout);
         serverNull = new AlertDialog.Builder(MainActivity.this).create();
 
+        serverNull.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
         /* 设定UI中的"添加病人"按钮部件事件 */
         setAddPatientAction();
 
@@ -110,7 +117,6 @@ public class MainActivity extends BaseNfcActivity {
 
                 /* 打开与服务器的连接 */
                 establishQueryCallable();
-
             }
         });
     }
@@ -139,19 +145,14 @@ public class MainActivity extends BaseNfcActivity {
         catch (ExecutionException e) {
             p = new Patient("NULL");
             //Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut, Snackbar.LENGTH_SHORT).show();
-            serverNull.setTitle(getString(R.string.serverNullTitle));
             serverNull.setMessage(getString(R.string.serverOut));
-            serverNull.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
             serverNull.show();
             e.printStackTrace();
         } catch (InterruptedException e) {
             p = new Patient("NULL");
-            Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut, Snackbar.LENGTH_SHORT).show();
+            //Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut, Snackbar.LENGTH_SHORT).show();
+            serverNull.setMessage(getString(R.string.serverOut));
+            serverNull.show();
             e.printStackTrace();
         }
     }
@@ -234,6 +235,8 @@ public class MainActivity extends BaseNfcActivity {
         } else {
             /* 若没有获得NDEF实例，弹出提示消息 */
             Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.ndefGetFail, Snackbar.LENGTH_SHORT).show();
+            serverNull.setMessage(getString(R.string.ndefGetFail));
+            serverNull.show();
         }
     }
 
@@ -352,7 +355,8 @@ public class MainActivity extends BaseNfcActivity {
 
             } catch (Exception e) {
                 /* 若连接失败则弹出消息 */
-                Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.serverOut, Snackbar.LENGTH_SHORT).show();
+                serverNull.setMessage(getString(R.string.serverOut));
+                serverNull.show();
                 e.printStackTrace();
             }
 

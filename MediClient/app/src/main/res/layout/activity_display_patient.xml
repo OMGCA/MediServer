@@ -11,15 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="false"
-        app:backgroundTint="@color/colorPatient"
+        app:backgroundTint="@color/design_default_color_primary"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPatient"
-            app:backgroundTint="@color/colorPatient"
+            android:background="@color/design_default_color_primary"
+            app:backgroundTint="@color/design_default_color_primary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
