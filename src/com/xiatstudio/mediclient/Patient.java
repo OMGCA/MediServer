@@ -37,8 +37,8 @@ public class Patient implements Serializable {
 		this.sex = "";
 		this.slotID = "";
 		this.doctor = "";
-		this.careLevel = "";
-		this.careTaboo = "";
+		this.careLevel = "暂无等级信息";
+		this.careTaboo = "暂无禁忌信息";
 		
 		this.bodyTemp = 0;
 		this.pulse = 0;
