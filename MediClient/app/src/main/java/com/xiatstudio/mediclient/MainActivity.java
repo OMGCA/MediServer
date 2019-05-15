@@ -227,6 +227,15 @@ public class MainActivity extends BaseNfcActivity {
 
             /* 自动填写NFC ID文本框 */
             patientID.setText(mTagText);
+
+            /* 得到文本区输入的服务器地址 */
+            final String serverAddress = serverAdd.getText().toString();
+            /* 得到文本区输入的病人ID */
+            final String queryID = patientID.getText().toString();
+
+            /* 打开与服务器的连接 */
+            establishQueryCallable();
+            
         } else {
             /* 若没有获得NDEF实例，弹出提示消息 */
             Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.ndefGetFail, Snackbar.LENGTH_SHORT).show();
