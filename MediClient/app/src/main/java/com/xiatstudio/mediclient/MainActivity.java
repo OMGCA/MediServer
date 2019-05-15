@@ -39,11 +39,7 @@ import android.widget.TextView;
  * 
  * MainActivity为打开App时的主界面，将要求使用者输入服务器地址和标签ID
  * 此外还可以直接与NFC标签建立连接，自动填写ID
- * 
- * © 2019 XiatStudio & 英国约克大学电子工程系医疗工程研究实验室 & 江苏大学京江学院 & 上海市复旦大学医学院
- * 项目设计：顾瑾
- * 程序设计：Tian-Sebastian 'OMGCA' Xia
- * 医疗顾问：Ray 'SennaAndProst' Qian
+ *
  */
 
 public class MainActivity extends BaseNfcActivity {
@@ -55,7 +51,7 @@ public class MainActivity extends BaseNfcActivity {
     /* EditText类，用于显示来自NFC标签的数据 */
     private EditText patientID;
     /* mTagText用于存储NFC标签数据 */
-    private String mTagText;
+    private String mTagText = "";
 
     private Button addButton;
     /* 查询按钮 */
@@ -227,7 +223,6 @@ public class MainActivity extends BaseNfcActivity {
 
         if (ndef != null) {
             /* 得到NFC标签内容并赋予mTagText */
-            mTagText = ndef.getType() + "\nmaxsize:" + ndef.getMaxSize() + "bytes\n\n";
             readNfcTag(intent);
 
             /* 自动填写NFC ID文本框 */
@@ -263,7 +258,7 @@ public class MainActivity extends BaseNfcActivity {
                 if (msgs != null) {
                     NdefRecord record = msgs[0].getRecords()[0];
                     String textRecord = parseTextRecord(record);
-                    mTagText += textRecord + "\n\ntext\n" + contentSize + " bytes";
+                    mTagText += textRecord;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
