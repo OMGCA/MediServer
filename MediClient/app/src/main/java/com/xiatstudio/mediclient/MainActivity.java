@@ -222,7 +222,10 @@ public class MainActivity extends BaseNfcActivity {
         Ndef ndef = Ndef.get(detectedTag);
 
         if (ndef != null) {
+            /* 初始化mTagText */
+            mTagText = "";
             /* 得到NFC标签内容并赋予mTagText */
+
             readNfcTag(intent);
 
             /* 自动填写NFC ID文本框 */
@@ -235,7 +238,7 @@ public class MainActivity extends BaseNfcActivity {
 
             /* 打开与服务器的连接 */
             establishQueryCallable();
-            
+
         } else {
             /* 若没有获得NDEF实例，弹出提示消息 */
             Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.ndefGetFail, Snackbar.LENGTH_SHORT).show();
