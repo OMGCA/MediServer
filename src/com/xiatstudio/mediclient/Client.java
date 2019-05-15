@@ -167,9 +167,9 @@ public class Client {
 					c.gridx = 0;
 					c.gridy = 0;
 
-					String[] demographics = { "姓名", "年龄", "性别", "识别号", "主治医师" };
+					String[] demographics = { "姓名", "年龄", "性别", "识别号", "主治医师","护理等级","护理禁忌" };
 					String[] demograInfo = { tmpPatient.getName(), String.valueOf(tmpPatient.getAge()),
-							tmpPatient.getSex(), tmpPatient.getSlotID(), tmpPatient.getDoc() };
+							tmpPatient.getSex(), tmpPatient.getSlotID(), tmpPatient.getDoc(), tmpPatient.getLevel(), tmpPatient.getTaboo() };
 
 					JLabel demo = new JLabel("个人信息");
 					demo.setFont(xtDefault);
@@ -311,6 +311,8 @@ public class Client {
 									newPatient.setSex(demoField[2].getText());
 									newPatient.setSlotID(demoField[3].getText());
 									newPatient.setDoc(demoField[4].getText());
+									newPatient.setLevel(demoField[5].getText());
+									newPatient.setTaboo(demoField[6].getText());
 
 									newPatient.setBodyTemp(Double.parseDouble(dataField[0].getText()));
 									newPatient.setPulse(Integer.parseInt(dataField[1].getText()));
